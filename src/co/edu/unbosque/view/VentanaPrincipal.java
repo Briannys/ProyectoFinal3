@@ -1,5 +1,10 @@
 package co.edu.unbosque.view;
 
-public class VentanaPrincipal {
+import javax.swing.JFrame;
 
+public class VentanaPrincipal extends JFrame {
+
+	public VentanaPrincipal() {
+		
+	}
 }

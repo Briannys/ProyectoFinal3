@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class VentanaPrincipal extends JFrame {
 	private PanelPortada panelPortada;
 	public VentanaPrincipal() {
-		setTitle("Programa Objetos de la Casa");
+		setTitle("Casa de Apuestas");
 		setSize(600, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.red);

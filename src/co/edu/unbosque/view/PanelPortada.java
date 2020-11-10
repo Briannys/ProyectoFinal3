@@ -25,7 +25,7 @@ public class PanelPortada extends JPanel {
 		inicializarBotones("REGISTRAR", 1, 320, 240, 150, 40, "Registrarse");
 		
 		personaLogo = new JLabel();
-		devolverImagenLabel("HouseApp", "png", 200, 200, personaLogo);
+		devolverImagenLabel("logo", "gif", 200, 200, personaLogo);
 		personaLogo.setBounds(200,70,200,200);
 		add(personaLogo);
 	}
@@ -33,6 +33,7 @@ public class PanelPortada extends JPanel {
 		botones[i]= new JButton(nombre);
 		//botones[i].setContentAreaFilled(false);
 		//botones[i].setBorder(null);
+		botones[i].setBackground(new Color(255,132,141));
 		botones[i].setActionCommand(command);
 		botones[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
 		botones[i].setBounds(x, y, xB, yB);

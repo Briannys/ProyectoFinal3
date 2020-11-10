@@ -32,15 +32,12 @@ public class PanelPortada extends JPanel {
 	public void inicializarBotones(String command, int i, int x, int y, int xB, int yB, String ruta , String ruta1 ) {
 		botones[i]= new JButton();
 		//botones[i].setContentAreaFilled(false);
-<<<<<<< HEAD
 		botones[i].setBorder(null);
 		botones[i].setBackground(Color.BLACK);
 		botones[i].setIcon(new ImageIcon(getClass().getResource(ruta)));
 		botones[i].setRolloverIcon(new ImageIcon (getClass().getResource(ruta1)));
-=======
 		//botones[i].setBorder(null);
 		botones[i].setBackground(new Color(255,132,141));
->>>>>>> branch 'master' of https://github.com/Briannys/ProyectoFinal3.git
 		botones[i].setActionCommand(command);
 		botones[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
 		botones[i].setBounds(x, y, xB, yB);

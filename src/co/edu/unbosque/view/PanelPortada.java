@@ -44,4 +44,31 @@ public class PanelPortada extends JPanel {
 		ImageIcon icon = new ImageIcon(imagen1.getImage().getScaledInstance(escalax, escalay, Image.SCALE_DEFAULT));
 		b.setIcon(icon);
 	}
+	public JButton devolverBoton(int i) {
+		  return botones[i];
+	}
+	/**
+	 * @return el botones
+	 */
+	public JButton[] getBotones() {
+		return botones;
+	}
+	/**
+	 * @param botones el botones a establecer
+	 */
+	public void setBotones(JButton[] botones) {
+		this.botones = botones;
+	}
+	/**
+	 * @return el personaLogo
+	 */
+	public JLabel getPersonaLogo() {
+		return personaLogo;
+	}
+	/**
+	 * @param personaLogo el personaLogo a establecer
+	 */
+	public void setPersonaLogo(JLabel personaLogo) {
+		this.personaLogo = personaLogo;
+	}
 }

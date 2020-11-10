@@ -9,7 +9,7 @@ public class VentanaPrincipal extends JFrame {
 	private PanelPortada panelPortada;
 	public VentanaPrincipal() {
 		setTitle("Programa Objetos de la Casa");
-		setSize(600, 500);
+		setSize(600, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.red);
 		getContentPane().setLayout(new BorderLayout(10,10));

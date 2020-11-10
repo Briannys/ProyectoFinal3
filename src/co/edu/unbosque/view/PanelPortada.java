@@ -37,7 +37,6 @@ public class PanelPortada extends JPanel {
 		botones[i].setIcon(new ImageIcon(getClass().getResource(ruta)));
 		botones[i].setRolloverIcon(new ImageIcon (getClass().getResource(ruta1)));
 		//botones[i].setBorder(null);
-		botones[i].setBackground(new Color(255,132,141));
 		botones[i].setActionCommand(command);
 		botones[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
 		botones[i].setBounds(x, y, xB, yB);

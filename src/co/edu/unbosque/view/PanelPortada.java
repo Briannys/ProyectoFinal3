@@ -21,18 +21,21 @@ public class PanelPortada extends JPanel {
 	}
 	public void inicializarComponentes() {
 		botones = new JButton[2];
-		inicializarBotones("INICIARSESION", 0, 120, 240, 150, 40, "Iniciar Sesión");
-		inicializarBotones("REGISTRAR", 1, 320, 240, 150, 40, "Registrarse");
+		inicializarBotones("INICIARSESION", 0, 120, 240, 178, 40,"/imagenes/Login.png", "/imagenes/Login1.png");
+		inicializarBotones("REGISTRAR", 1, 320, 240, 178, 40, "/imagenes/reg.png" , "/imagenes/reg1.png" );
 		
 		personaLogo = new JLabel();
 		devolverImagenLabel("HouseApp", "png", 200, 200, personaLogo);
 		personaLogo.setBounds(200,70,200,200);
 		add(personaLogo);
 	}
-	public void inicializarBotones(String command, int i, int x, int y, int xB, int yB, String nombre) {
-		botones[i]= new JButton(nombre);
+	public void inicializarBotones(String command, int i, int x, int y, int xB, int yB, String ruta , String ruta1 ) {
+		botones[i]= new JButton();
 		//botones[i].setContentAreaFilled(false);
-		//botones[i].setBorder(null);
+		botones[i].setBorder(null);
+		botones[i].setBackground(Color.BLACK);
+		botones[i].setIcon(new ImageIcon(getClass().getResource(ruta)));
+		botones[i].setRolloverIcon(new ImageIcon (getClass().getResource(ruta1)));
 		botones[i].setActionCommand(command);
 		botones[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
 		botones[i].setBounds(x, y, xB, yB);

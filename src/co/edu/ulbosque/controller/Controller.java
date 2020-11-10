@@ -10,7 +10,7 @@ public class Controller implements ActionListener {
 	public Controller() {
 		vista = new VentanaPrincipal();
 	}
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		
 		

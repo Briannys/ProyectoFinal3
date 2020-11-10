@@ -15,7 +15,8 @@ public class PanelPortada extends JPanel {
 	}
 	public void inicializarComponentes() {
 		botones = new JButton[2];
-		inicializarBotones("INICIARSESION", 0, 0, 0, 40, 40, "Iniciar Sesión");
+		inicializarBotones("INICIARSESION", 0, 120, 340, 150, 40, "Iniciar Sesión");
+		inicializarBotones("REGISTRAR", 1, 320, 340, 150, 40, "Registrarse");
 	}
 	public void inicializarBotones(String command, int i, int x, int y, int xB, int yB, String nombre) {
 		botones[i]= new JButton(nombre);

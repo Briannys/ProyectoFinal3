@@ -6,7 +6,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 public class VentanaPrincipal extends JFrame {
-	
+	private PanelPortada panelPortada;
 	public VentanaPrincipal() {
 		setTitle("Programa Objetos de la Casa");
 		setSize(600, 500);
@@ -18,6 +18,7 @@ public class VentanaPrincipal extends JFrame {
 		setVisible(true);
 	}
 	public void inicializarComponentes() {
-		
+	panelPortada = new PanelPortada();
+	getContentPane().add(panelPortada);
 	}
 }

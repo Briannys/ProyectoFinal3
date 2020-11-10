@@ -21,12 +21,12 @@ public class PanelPortada extends JPanel {
 	}
 	public void inicializarComponentes() {
 		botones = new JButton[2];
-		inicializarBotones("INICIARSESION", 0, 120, 240, 150, 40, "Iniciar Sesión");
-		inicializarBotones("REGISTRAR", 1, 320, 240, 150, 40, "Registrarse");
+		inicializarBotones("INICIARSESION", 0, 220, 0, 150, 40, "Iniciar Sesión");
+		inicializarBotones("REGISTRAR", 1, 390, 0, 150, 40, "Registrarse");
 		
 		personaLogo = new JLabel();
-		devolverImagenLabel("logo", "gif", 200, 200, personaLogo);
-		personaLogo.setBounds(200,70,200,200);
+		devolverImagenLabel("logo", "gif", 600, 500, personaLogo);
+		personaLogo.setBounds(200,70,600,500);
 		add(personaLogo);
 	}
 	public void inicializarBotones(String command, int i, int x, int y, int xB, int yB, String nombre) {

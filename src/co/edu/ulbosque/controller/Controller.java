@@ -14,7 +14,7 @@ public class Controller implements ActionListener {
 	public void asignarOyentes() {
 		vista.getPanelPortada().devolverBoton(0).addActionListener(this);
 	}
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();	
 		if (command.equals("INICIARSESION")) {

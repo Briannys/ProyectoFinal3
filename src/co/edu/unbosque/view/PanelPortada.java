@@ -22,7 +22,7 @@ public class PanelPortada extends JPanel {
 	public void inicializarComponentes() {
 		botones = new JButton[2];
 		inicializarBotones("INICIARSESION", 0, 120, 240, 178, 40,"/imagenes/Login.png", "/imagenes/Login1.png");
-		inicializarBotones("REGISTRAR", 1, 320, 240, 178, 40, "/imagenes/reg.png" , "/imagenes/reg1.png" );
+		inicializarBotones("REGISTRAR", 1, 320, 240, 154, 40, "/imagenes/reg.png" , "/imagenes/reg1.png" );
 		
 		personaLogo = new JLabel();
 		devolverImagenLabel("logo", "gif", 200, 200, personaLogo);

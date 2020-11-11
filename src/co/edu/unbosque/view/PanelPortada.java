@@ -13,7 +13,7 @@ public class PanelPortada extends JPanel {
 	}
 	public void inicializarComponentes() {
 		botones = new JButton[2];
-		botones[0]= new JButton("Iniciar Sesión");
+		botones[0]= new JButton("Iniciar SesiÃ³n");
 		botones[0].setBounds(0,0,100,100);
 		add(botones[0]);
 	}

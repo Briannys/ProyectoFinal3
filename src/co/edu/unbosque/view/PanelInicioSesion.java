@@ -54,7 +54,7 @@ public class PanelInicioSesion extends JPanel {
 		reg = new JButton(devolverImagenButton("reg", "gif", 160, 30));
 		reg.setBackground(Color.WHITE);
 		reg.setBorderPainted(false);
-		reg.setRolloverIcon(devolverImagenButton("reg1", "png", 160, 30));
+		reg.setRolloverIcon(devolverImagenButton("registro", "png", 160, 30));
 		reg.setActionCommand("REGISTRARSE");
 		reg.setBounds(700, 35, 160, 30);
 		inicio.add(reg);

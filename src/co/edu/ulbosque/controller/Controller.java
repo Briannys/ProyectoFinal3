@@ -33,6 +33,18 @@ public class Controller implements ActionListener {
 
 			System.out.println(command);
 
+		} else if (command.equals("BALOTO")) {
+
+			vista.getPanelInicioSesion().setVisible(false);
+
+		} else if (command.equals("SUPERASTRO")) {
+
+			vista.getPanelInicioSesion().setVisible(false);
+
+		} else if (command.equals("FUTBOL")) {
+
+			vista.getPanelInicioSesion().setVisible(false);
+
 		}
 	}
 }

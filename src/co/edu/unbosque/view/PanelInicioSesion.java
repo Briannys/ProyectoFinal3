@@ -39,21 +39,21 @@ public class PanelInicioSesion extends JPanel {
 		add(inicio);
 
 		l2 = new JLabel();
-		devolverImagenLabel("User", "png", 30, 30, l2);
-		l2.setBounds(480, 35, 30, 30);
+		devolverImagenLabel("User", "gif", 40, 40, l2);
+		l2.setBounds(460, 30, 40, 40);
 		inicio.add(l2);
 
-		login = new JButton(devolverImagenButton("log", "png", 160, 30));
+		login = new JButton(devolverImagenButton("login", "gif", 160, 30));
 		login.setBackground(Color.WHITE);
 		login.setRolloverIcon(devolverImagenButton("log1", "png", 160, 30));
 		login.setBorder(null);
 		login.setActionCommand("INICIARSESION");
 		login.setBounds(520, 35, 160, 30);
-		devolverImagenButton("log", "png", 160, 30);
 		inicio.add(login);
 
-		reg = new JButton(devolverImagenButton("reg", "png", 160, 30));
+		reg = new JButton(devolverImagenButton("reg", "gif", 160, 30));
 		reg.setBackground(Color.WHITE);
+		reg.setBorderPainted(false);
 		reg.setRolloverIcon(devolverImagenButton("reg1", "png", 160, 30));
 		reg.setActionCommand("REGISTRARSE");
 		reg.setBounds(700, 35, 160, 30);
@@ -69,10 +69,10 @@ public class PanelInicioSesion extends JPanel {
 		juegos.setBounds(5,113, 875, 545);
 		juegos.setLayout(null);
 		juegos.setVisible(true);
-		juegos.setBackground(Color.WHITE);
+		juegos.setBackground(new Color(3,6, 97));
 		add(juegos);
 		
-		baloto = new JButton(devolverImagenButton("Balota", "png", 220, 300));
+		baloto = new JButton(devolverImagenButton("Baloto", "gif", 220, 300));
 		baloto.setBounds(60, 100, 220, 300);
 		baloto.setActionCommand("BALOTO");
 		baloto.setBackground(Color.WHITE);
@@ -80,10 +80,11 @@ public class PanelInicioSesion extends JPanel {
 
 		lbalo = new JLabel("Baloto");
 		lbalo.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lbalo.setForeground(Color.WHITE);
 		lbalo.setBounds(110, 60, 220, 40);
 		juegos.add(lbalo);
 
-		astro = new JButton(devolverImagenButton("super", "jpg", 220, 300));
+		astro = new JButton(devolverImagenButton("super", "gif", 220, 300));
 		astro.setBackground(Color.WHITE);
 		astro.setActionCommand("SUPERASTRO");
 		astro.setBounds(330, 100, 220, 300);
@@ -91,10 +92,11 @@ public class PanelInicioSesion extends JPanel {
 
 		lsupe = new JLabel("Super Astro");
 		lsupe.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lsupe.setForeground(Color.WHITE);
 		lsupe.setBounds(360, 60, 220, 40);
 		juegos.add(lsupe);
 
-		futbol = new JButton(devolverImagenButton("futbol", "jpg", 220, 300));
+		futbol = new JButton(devolverImagenButton("futbol", "gif", 220, 300));
 		futbol.setBackground(Color.WHITE);
 		futbol.setActionCommand("FUTBOL");
 		futbol.setBounds(600, 100, 220, 300);
@@ -103,6 +105,7 @@ public class PanelInicioSesion extends JPanel {
 		lfutbol = new JLabel("Marcadores");
 		lfutbol.setBackground(Color.WHITE);
 		lfutbol.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lfutbol.setForeground(Color.WHITE);
 		lfutbol.setBounds(620, 60, 240, 40);
 		juegos.add(lfutbol);
 		

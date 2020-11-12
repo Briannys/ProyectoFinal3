@@ -29,7 +29,7 @@ public class Controller implements ActionListener {
 
 			System.out.println(command);
 
-		} else if (command.equals("REGISTRO")) {
+		} else if (command.equals("REGISTRARSE")) {
 
 			System.out.println(command);
 

@@ -27,8 +27,7 @@ public class Controller implements ActionListener {
 
 		if (command.equals("REGISTRARSE")) {
 			cambiarPanel(vista.getPanelRegistro());
-			vista.setSize(600,540);
-			vista.setLocationRelativeTo(null);
+			tamañoVentanas(600, 540);
 		}else if (command.equals("CIUDADANIA")) {
 			if (vista.getPanelRegistro().devolverRadioButton(0).isSelected() == true) {
 				vista.getPanelRegistro().devolverRadioButton(1).setEnabled(false);

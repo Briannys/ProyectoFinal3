@@ -27,7 +27,7 @@ public class Controller implements ActionListener {
 
 		if (command.equals("REGISTRARSE")) {
 			cambiarPanel(vista.getPanelRegistro());
-			tamaÃ±oVentanas(600, 540);
+			tamañoVentanas(600, 540);
 		}else if (command.equals("CIUDADANIA")) {
 			if (vista.getPanelRegistro().devolverRadioButton(0).isSelected() == true) {
 				vista.getPanelRegistro().devolverRadioButton(1).setEnabled(false);
@@ -83,7 +83,7 @@ public class Controller implements ActionListener {
 		panel.setVisible(true);
 		vista.getContentPane().repaint();
 	}
-	public void tamaÃ±oVentanas(int x, int y) {
+	public void tamañoVentanas(int x, int y) {
 		vista.setSize(x, y);
 		vista.setLocationRelativeTo(null);
 	}

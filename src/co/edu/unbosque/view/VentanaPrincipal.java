@@ -10,7 +10,7 @@ import javax.swing.UIManager;
 
 public class VentanaPrincipal extends JFrame {
 	private PanelInicioSesion panelInicioSesion;
-
+	private PanelRegistro panelRegistro;
 	public VentanaPrincipal() {
 		setTitle("Casa de Apuestas");
 		setSize(900, 700);
@@ -25,8 +25,10 @@ public class VentanaPrincipal extends JFrame {
 	public void inicializarComponentes() {
 
 		panelInicioSesion = new PanelInicioSesion();
-		add(panelInicioSesion, BorderLayout.CENTER);
-
+		//add(panelInicioSesion, BorderLayout.CENTER);
+		getContentPane().add(panelInicioSesion);
+		
+		panelRegistro = new PanelRegistro();
 	}
 	
 	
@@ -51,5 +53,17 @@ public class VentanaPrincipal extends JFrame {
 
 		}
 	}
+	/**
+	 * @return el panelRegistro
+	 */
+	public PanelRegistro getPanelRegistro() {
+		return panelRegistro;
+	}
 
+	/**
+	 * @param panelRegistro el panelRegistro a establecer
+	 */
+	public void setPanelRegistro(PanelRegistro panelRegistro) {
+		this.panelRegistro = panelRegistro;
+	}
 }

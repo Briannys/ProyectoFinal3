@@ -24,7 +24,7 @@ public class PanelRegistro extends JPanel {
 	private JTextArea[] camposRegistro;
 	private JDateChooser calendar1;
 	private String fecha;
-	private JPasswordField[] contraseña;
+	private JPasswordField[] contraseÃ±a;
 	private JRadioButton[] tipoCedula;
 	DateFormat date;
 	public PanelRegistro() {
@@ -38,12 +38,12 @@ public class PanelRegistro extends JPanel {
 		inicializarLabels("Nombres y Apellidos",0, 60, 60, 200, 100);
 		inicializarLabels("Telefono", 1, 60, 120, 100, 60);
 		inicializarLabels("Correo Electronico", 2, 60, 160, 140, 60);
-		inicializarLabels("Año de Nacimiento", 3, 60, 280, 140, 60);
-		inicializarLabels("Contraseña", 4, 60, 360,140,60);
-		inicializarLabels("Confirmar Contraseña", 5, 60, 400,140,60);
+		inicializarLabels("AÃ±o de Nacimiento", 3, 60, 280, 140, 60);
+		inicializarLabels("ContraseÃ±a", 4, 60, 360,140,60);
+		inicializarLabels("Confirmar Contraseï¿½a", 5, 60, 400,140,60);
 		inicializarLabels("Registrar una nueva cuenta", 6, 160, 20, 290, 60);
 		registros[6].setFont(new Font("Century Gothic", 0, 20));
-		inicializarLabels("Cédula", 7,60, 240, 140, 60);
+		inicializarLabels("CÃ©dula", 7,60, 240, 140, 60);
 		inicializarLabels("Nombre de Usuario",8, 60, 320, 140, 60);
 		inicializarLabels("Tipo de Documento", 9,60, 200, 140, 60);
 		
@@ -52,8 +52,8 @@ public class PanelRegistro extends JPanel {
 		devolverImagenLabel("telefono", "png", 20, 20, 9, 30, 65, 100, 170);
 		devolverImagenLabel("correo", "png", 20, 20, 10, 30, 105, 100, 170);
 		devolverImagenLabel("cedula", "png", 20, 20, 11, 30, 145, 100, 170);
-		devolverImagenLabel("añoNacimiento", "png", 40, 40, 12,20, 225, 100, 170 );
-		devolverImagenLabel("contraseña", "png", 20, 20, 13, 30, 305, 100, 170 );
+		devolverImagenLabel("aÃ±oNacimiento", "png", 40, 40, 12,20, 225, 100, 170 );
+		devolverImagenLabel("contraseÃ±a", "png", 20, 20, 13, 30, 305, 100, 170 );
 		devolverImagenLabel("confirmarContra", "png", 20, 20, 14,30, 348, 100, 170);
 		devolverImagenLabel("user", "png", 20, 20, 15,30, 265, 100, 170 );
 		devolverImagenLabel("cedula", "png", 20, 20, 16, 30, 185, 100, 170);
@@ -76,11 +76,11 @@ public class PanelRegistro extends JPanel {
 		inicializarCampos(4, 220, 340, 200, 20);
 		//inicializarCampos(4, 220, 300, 200, 20);
 		//inicializarCampos(5, 220, 340, 200, 20);
-		contraseña = new JPasswordField[2];
+		contraseÃ±a = new JPasswordField[2];
 		inicializarJPassword(0,  220, 380, 200, 20);
 		inicializarJPassword(1, 220, 420, 200, 20);
 		tipoCedula = new JRadioButton[4];
-		inicializarBotonesCedula("CC Ciudadanía", 0,"CIUDADANIA", 220, 215, 120, 30);
+		inicializarBotonesCedula("CC CiudadanÃ­a", 0,"CIUDADANIA", 220, 215, 120, 30);
 		inicializarBotonesCedula("CC Extranjeria", 1, "EXTRANJERIA", 340, 215, 120, 30);
 		inicializarBotonesCedula("Pasaporte", 2, "PASAPORTE", 460, 215, 120, 30);
 		
@@ -121,10 +121,10 @@ public class PanelRegistro extends JPanel {
 		
 	}
 	public void inicializarJPassword(int pos,  int x, int y, int xB, int yB) {
-		contraseña[pos] = new JPasswordField();
-		contraseña[pos].setBounds(x, y, xB, yB);
-		contraseña[pos].setBorder(new LineBorder(Color.black));
-		add(contraseña[pos]);
+		contraseÃ±a[pos] = new JPasswordField();
+		contraseÃ±a[pos].setBounds(x, y, xB, yB);
+		contraseÃ±a[pos].setBorder(new LineBorder(Color.black));
+		add(contraseÃ±a[pos]);
 	}
 	public void inicializarBotonesCedula(String tipoCedula, int pos, String command, int x, int y, int xB, int yB) {
 		this.tipoCedula[pos]= new JRadioButton(tipoCedula);
@@ -212,15 +212,15 @@ public class PanelRegistro extends JPanel {
 		this.camposRegistro = camposRegistro;
 	}
 	/**
-	 * @return el contraseña
+	 * @return el contraseÃ±a
 	 */
-	public JPasswordField[] getContraseña() {
-		return contraseña;
+	public JPasswordField[] getContraseÃ±a() {
+		return contraseÃ±a;
 	}
 	/**
-	 * @param contraseña el contraseña a establecer
+	 * @param contraseï¿½a el contraseÃ±a a establecer
 	 */
-	public void setContraseña(JPasswordField[] contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseÃ±a(JPasswordField[] contraseÃ±a) {
+		this.contraseÃ±a = contraseÃ±a;
 	}
 }

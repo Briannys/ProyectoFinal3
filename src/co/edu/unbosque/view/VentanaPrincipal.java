@@ -9,13 +9,13 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class VentanaPrincipal extends JFrame {
-	private PanelPortada panelPortada;
-	private PanelRegistro panelRegistro;
+	private PanelInicioSesion panelInicioSesion;
+
 	public VentanaPrincipal() {
 		setTitle("Casa de Apuestas");
-		setSize(600, 400);
+		setSize(900, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setBackground(Color.red);
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		getContentPane().setLayout(new BorderLayout(10, 10));
 		inicializarComponentes();
 		setLocationRelativeTo(null);
@@ -23,11 +23,20 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void inicializarComponentes() {
-		panelPortada = new PanelPortada();
-		getContentPane().add(panelPortada);
-		
-		panelRegistro = new PanelRegistro(null);
-	//	getContentPane().add(panelRegistro);
+
+		panelInicioSesion = new PanelInicioSesion();
+		add(panelInicioSesion, BorderLayout.CENTER);
+
+	}
+	
+	
+
+	public PanelInicioSesion getPanelInicioSesion() {
+		return panelInicioSesion;
+	}
+
+	public void setPanelInicioSesion(PanelInicioSesion panelInicioSesion) {
+		this.panelInicioSesion = panelInicioSesion;
 	}
 
 	public void mensajeInformativo() {
@@ -43,32 +52,4 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 
-	/**
-	 * @return el panelPortada
-	 */
-	public PanelPortada getPanelPortada() {
-		return panelPortada;
-	}
-
-	/**
-	 * @param panelPortada el panelPortada a establecer
-	 */
-	public void setPanelPortada(PanelPortada panelPortada) {
-		this.panelPortada = panelPortada;
-	}
-
-	/**
-	 * @return el panelRegistro
-	 */
-	public PanelRegistro getPanelRegistro() {
-		return panelRegistro;
-	}
-
-	/**
-	 * @param panelRegistro el panelRegistro a establecer
-	 */
-	public void setPanelRegistro(PanelRegistro panelRegistro) {
-		this.panelRegistro = panelRegistro;
-	}
-	
 }

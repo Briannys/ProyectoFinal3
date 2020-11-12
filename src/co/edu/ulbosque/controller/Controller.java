@@ -84,7 +84,7 @@ public class Controller implements ActionListener {
 		vista.getContentPane().repaint();
 	}
 	public void tamañoVentanas(int x, int y) {
-		vista.setSize(x , y);
+		vista.setSize(x, y);
 		vista.setLocationRelativeTo(null);
 	}
 }

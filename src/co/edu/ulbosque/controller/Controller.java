@@ -2,6 +2,7 @@ package co.edu.ulbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 
 import co.edu.unbosque.view.VentanaPrincipal;
 
@@ -24,4 +25,5 @@ public class Controller implements ActionListener {
 			vista.getPanelRegistro().setVisible(true);		
 		}
 	}
+
 }

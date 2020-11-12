@@ -15,14 +15,25 @@ public class Controller implements ActionListener {
 	}
 
 	public void asignarOyentes() {
-		vista.getPanelPortada().devolverBoton(0).addActionListener(this);
+
+		vista.getPanelInicioSesion().getLogin().addActionListener(this);
+		vista.getPanelInicioSesion().getReg().addActionListener(this);
+		vista.getPanelInicioSesion().getAstro().addActionListener(this);
+		vista.getPanelInicioSesion().getFutbol().addActionListener(this);
+		vista.getPanelInicioSesion().getBaloto().addActionListener(this);
+
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		if (command.equals("INICIARSESION")) {
+
 			System.out.println(command);
-			vista.getPanelRegistro().setVisible(true);		
+
+		} else if (command.equals("REGISTRARSE")) {
+
+			System.out.println(command);
+
 		}
 	}
 

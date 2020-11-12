@@ -24,6 +24,7 @@ public class Controller implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+
 		if (command.equals("REGISTRARSE")) {
 			cambiarPanel(vista.getPanelRegistro());
 			vista.setSize(600,540);
@@ -52,6 +53,27 @@ public class Controller implements ActionListener {
 				vista.getPanelRegistro().devolverRadioButton(0).setEnabled(true);
 				vista.getPanelRegistro().devolverRadioButton(1).setEnabled(true);
 			}
+		if (command.equals("INICIARSESION")) {
+
+			System.out.println(command);
+
+		} else if (command.equals("REGISTRARSE")) {
+
+			System.out.println(command);
+
+		} else if (command.equals("BALOTO")) {
+
+			vista.getPanelInicioSesion().setVisible(false);
+
+		} else if (command.equals("SUPERASTRO")) {
+
+			vista.getPanelInicioSesion().setVisible(false);
+
+		} else if (command.equals("FUTBOL")) {
+
+			vista.getPanelInicioSesion().setVisible(false);
+
+		}
 		}
 	}
 	public void oyentesBotonesRegistro() {

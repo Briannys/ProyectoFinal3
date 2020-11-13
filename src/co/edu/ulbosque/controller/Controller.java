@@ -32,10 +32,10 @@ public class Controller implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-
+		System.out.println(command);
 		if (command.equals("REGISTRARSE")) {
-			cambiarPanel(vista.getPanelRegistro());
 			tamanoVentanas(600, 650);
+			cambiarPanel(vista.getPanelRegistro());
 		}else if (command.equals("CIUDADANIA")) {
 			if (vista.getPanelRegistro().devolverRadioButton(0).isSelected() == true) {
 				vista.getPanelRegistro().devolverRadioButton(1).setEnabled(false);

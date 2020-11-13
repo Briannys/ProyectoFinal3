@@ -26,11 +26,9 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void inicializarComponentes() {
-
 		panelInicioSesion = new PanelInicioSesion();
 		//add(panelInicioSesion, BorderLayout.CENTER);
 		getContentPane().add(panelInicioSesion);
-		
 		panelIniciarSesion = new PanelIniciarSesion();
 		panelRegistro = new PanelRegistro();
 		panelOlvidarContra = new PanelOlvidarContra();

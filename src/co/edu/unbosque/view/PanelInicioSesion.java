@@ -1,18 +1,13 @@
 package co.edu.unbosque.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 public class PanelInicioSesion extends JPanel {
 
@@ -21,7 +16,6 @@ public class PanelInicioSesion extends JPanel {
 	private JPanel inicio, juegos;
 
 	public PanelInicioSesion() {
-
 		setLayout(null);
 		setVisible(true);
 		setBackground(Color.LIGHT_GRAY);

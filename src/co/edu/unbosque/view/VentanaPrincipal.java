@@ -10,7 +10,10 @@ import javax.swing.UIManager;
 
 public class VentanaPrincipal extends JFrame {
 	private PanelInicioSesion panelInicioSesion;
+	private PanelIniciarSesion panelIniciarSesion;
 	private PanelRegistro panelRegistro;
+	private PanelOlvidarContra panelOlvidarContra;
+	
 	public VentanaPrincipal() {
 		setTitle("Casa de Apuestas");
 		setSize(900, 700);
@@ -28,7 +31,9 @@ public class VentanaPrincipal extends JFrame {
 		//add(panelInicioSesion, BorderLayout.CENTER);
 		getContentPane().add(panelInicioSesion);
 		
+		panelIniciarSesion = new PanelIniciarSesion();
 		panelRegistro = new PanelRegistro();
+		panelOlvidarContra = new PanelOlvidarContra();
 	}
 	
 	
@@ -66,4 +71,33 @@ public class VentanaPrincipal extends JFrame {
 	public void setPanelRegistro(PanelRegistro panelRegistro) {
 		this.panelRegistro = panelRegistro;
 	}
+
+	/**
+	 * @return el panelIniciarSesion
+	 */
+	public PanelIniciarSesion getPanelIniciarSesion() {
+		return panelIniciarSesion;
+	}
+
+	/**
+	 * @param panelIniciarSesion el panelIniciarSesion a establecer
+	 */
+	public void setPanelIniciarSesion(PanelIniciarSesion panelIniciarSesion) {
+		this.panelIniciarSesion = panelIniciarSesion;
+	}
+
+	/**
+	 * @return el panelOlvidarContra
+	 */
+	public PanelOlvidarContra getPanelOlvidarContra() {
+		return panelOlvidarContra;
+	}
+
+	/**
+	 * @param panelOlvidarContra el panelOlvidarContra a establecer
+	 */
+	public void setPanelOlvidarContra(PanelOlvidarContra panelOlvidarContra) {
+		this.panelOlvidarContra = panelOlvidarContra;
+	}
+	
 }

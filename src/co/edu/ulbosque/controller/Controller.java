@@ -20,6 +20,14 @@ public class Controller implements ActionListener {
 		vista.getPanelRegistro().devolverRadioButton(0).addActionListener(this);
 		vista.getPanelRegistro().devolverRadioButton(1).addActionListener(this);
 		vista.getPanelRegistro().devolverRadioButton(2).addActionListener(this);
+		vista.getPanelIniciarSesion().getOlvidarContra().addActionListener(this);
+		vista.getPanelIniciarSesion().getRegistrar().addActionListener(this);
+		vista.getPanelRegistro().getIniciarSesion().addActionListener(this);
+		vista.getPanelInicioSesion().getLogin().addActionListener(this);
+		vista.getPanelInicioSesion().getReg().addActionListener(this);
+		vista.getPanelInicioSesion().getAstro().addActionListener(this);
+		vista.getPanelInicioSesion().getFutbol().addActionListener(this);
+		vista.getPanelInicioSesion().getBaloto().addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -27,7 +35,7 @@ public class Controller implements ActionListener {
 
 		if (command.equals("REGISTRARSE")) {
 			cambiarPanel(vista.getPanelRegistro());
-			tamañoVentanas(600, 650);
+			tamanoVentanas(600, 650);
 		}else if (command.equals("CIUDADANIA")) {
 			if (vista.getPanelRegistro().devolverRadioButton(0).isSelected() == true) {
 				vista.getPanelRegistro().devolverRadioButton(1).setEnabled(false);
@@ -52,11 +60,19 @@ public class Controller implements ActionListener {
 				vista.getPanelRegistro().devolverRadioButton(0).setEnabled(true);
 				vista.getPanelRegistro().devolverRadioButton(1).setEnabled(true);
 			}
-		if (command.equals("INICIARSESION")) {
-
+			}else if (command.equals("OLVIDARCONTRA")) {
+				tamanoVentanas(500, 350);
+				cambiarPanel(vista.getPanelOlvidarContra());
+			}else if (command.equals("REGISTRATE")) {
+				tamanoVentanas(600, 650);
+				cambiarPanel(vista.getPanelRegistro());
+			}else if (command.equals("INICIARSESIONREGISTRAR")) {
+				tamanoVentanas(500, 350);
+				cambiarPanel(vista.getPanelIniciarSesion());
+			}else if (command.equals("INICIARSESION")) {
 			System.out.println(command);
-
-
+			tamanoVentanas(500, 350);
+			cambiarPanel(vista.getPanelIniciarSesion());
 		} else if (command.equals("BALOTO")) {
 
 			vista.getPanelInicioSesion().setVisible(false);
@@ -66,10 +82,8 @@ public class Controller implements ActionListener {
 			vista.getPanelInicioSesion().setVisible(false);
 
 		} else if (command.equals("FUTBOL")) {
-
 			vista.getPanelInicioSesion().setVisible(false);
 
-		}
 		}
 	}
 	public void oyentesBotonesRegistro() {
@@ -83,7 +97,7 @@ public class Controller implements ActionListener {
 		panel.setVisible(true);
 		vista.getContentPane().repaint();
 	}
-	public void tamañoVentanas(int x, int y) {
+	public void tamanoVentanas(int x, int y) {
 		vista.setSize(x, y);
 		vista.setLocationRelativeTo(null);
 	}

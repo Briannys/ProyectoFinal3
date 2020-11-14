@@ -9,13 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PanelInicioSesion extends JPanel {
+public class PanelPortada extends JPanel {
 
 	private JLabel l1, l2, lbalo, lsupe, lfutbol;
 	private JButton login, reg, baloto, astro, futbol;
 	private JPanel inicio, juegos;
 
-	public PanelInicioSesion() {
+	public PanelPortada() {
 		setLayout(null);
 		setVisible(true);
 		setBackground(Color.LIGHT_GRAY);

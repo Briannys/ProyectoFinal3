@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class VentanaPrincipal extends JFrame {
-	private PanelInicioSesion panelInicioSesion;
-	private PanelIniciarSesion panelIniciarSesion;
+	private PanelPortada panelInicioSesion;
+	private PanelIniciarSesion panelPortada;
 	private PanelRegistro panelRegistro;
 	private PanelOlvidarContra panelOlvidarContra;
 	
@@ -26,21 +26,21 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void inicializarComponentes() {
-		panelInicioSesion = new PanelInicioSesion();
+		panelInicioSesion = new PanelPortada();
 		//add(panelInicioSesion, BorderLayout.CENTER);
 		getContentPane().add(panelInicioSesion);
-		panelIniciarSesion = new PanelIniciarSesion();
+		panelPortada = new PanelIniciarSesion();
 		panelRegistro = new PanelRegistro();
 		panelOlvidarContra = new PanelOlvidarContra();
 	}
 	
 	
 
-	public PanelInicioSesion getPanelInicioSesion() {
+	public PanelPortada getPanelInicioSesion() {
 		return panelInicioSesion;
 	}
 
-	public void setPanelInicioSesion(PanelInicioSesion panelInicioSesion) {
+	public void setPanelInicioSesion(PanelPortada panelInicioSesion) {
 		this.panelInicioSesion = panelInicioSesion;
 	}
 
@@ -70,18 +70,20 @@ public class VentanaPrincipal extends JFrame {
 		this.panelRegistro = panelRegistro;
 	}
 
+	
+
 	/**
-	 * @return el panelIniciarSesion
+	 * @return the panelPortada
 	 */
-	public PanelIniciarSesion getPanelIniciarSesion() {
-		return panelIniciarSesion;
+	public PanelIniciarSesion getPanelPortada() {
+		return panelPortada;
 	}
 
 	/**
-	 * @param panelIniciarSesion el panelIniciarSesion a establecer
+	 * @param panelPortada the panelPortada to set
 	 */
-	public void setPanelIniciarSesion(PanelIniciarSesion panelIniciarSesion) {
-		this.panelIniciarSesion = panelIniciarSesion;
+	public void setPanelPortada(PanelIniciarSesion panelPortada) {
+		this.panelPortada = panelPortada;
 	}
 
 	/**

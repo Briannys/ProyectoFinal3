@@ -14,14 +14,15 @@ public class Controller implements ActionListener {
 		vista = new VentanaPrincipal();
 		asignarOyentes();
 	}
+
 	public void asignarOyentes() {
 		vista.getPanelInicioSesion().getReg().addActionListener(this);
 		oyentesBotonesRegistro();
 		vista.getPanelRegistro().devolverRadioButton(0).addActionListener(this);
 		vista.getPanelRegistro().devolverRadioButton(1).addActionListener(this);
 		vista.getPanelRegistro().devolverRadioButton(2).addActionListener(this);
-		vista.getPanelIniciarSesion().getOlvidarContra().addActionListener(this);
-		vista.getPanelIniciarSesion().getRegistrar().addActionListener(this);
+		vista.getPanelPortada().getOlvidarContra().addActionListener(this);
+		vista.getPanelPortada().getRegistrar().addActionListener(this);
 		vista.getPanelRegistro().getIniciarSesion().addActionListener(this);
 		vista.getPanelInicioSesion().getLogin().addActionListener(this);
 		vista.getPanelInicioSesion().getReg().addActionListener(this);
@@ -29,7 +30,7 @@ public class Controller implements ActionListener {
 		vista.getPanelInicioSesion().getFutbol().addActionListener(this);
 		vista.getPanelInicioSesion().getBaloto().addActionListener(this);
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		System.out.println(command);
@@ -68,11 +69,11 @@ public class Controller implements ActionListener {
 				cambiarPanel(vista.getPanelRegistro());
 			}else if (command.equals("INICIARSESIONREGISTRAR")) {
 				tamanoVentanas(500, 350);
-				cambiarPanel(vista.getPanelIniciarSesion());
+				cambiarPanel(vista.getPanelPortada());
 			}else if (command.equals("INICIARSESION")) {
 			System.out.println(command);
 			tamanoVentanas(500, 350);
-			cambiarPanel(vista.getPanelIniciarSesion());
+			cambiarPanel(vista.getPanelPortada());
 		} else if (command.equals("BALOTO")) {
 
 			vista.getPanelInicioSesion().setVisible(false);
@@ -86,17 +87,20 @@ public class Controller implements ActionListener {
 
 		}
 	}
+
 	public void oyentesBotonesRegistro() {
 		for (int i = 0; i < 2; i++) {
 			vista.getPanelRegistro().devolverBoton(i).addActionListener(this);
 		}
 	}
+
 	public void cambiarPanel(Component panel) {
 		vista.getContentPane().removeAll();
 		vista.getContentPane().add(panel);
 		panel.setVisible(true);
 		vista.getContentPane().repaint();
 	}
+
 	public void tamanoVentanas(int x, int y) {
 		vista.setSize(x, y);
 		vista.setLocationRelativeTo(null);

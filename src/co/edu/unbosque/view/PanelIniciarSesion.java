@@ -22,6 +22,7 @@ public class PanelIniciarSesion extends JPanel {
 	private JPasswordField contrasena;
 	private JButton ingresar;
 	private JButton registrar;
+	private JButton atras;
 	public PanelIniciarSesion() {
 		setLayout(null);
 		setVisible(false);
@@ -38,6 +39,11 @@ public class PanelIniciarSesion extends JPanel {
 		registros[3].setFont(new Font("Century Gothic", 1, 11));
 		devolverImagenLabel("user", "png", 20, 20, 2,30, 32, 100, 170 );
 		devolverImagenLabel("contrasena", "png",20, 20, 3, 30, 80, 100, 170);
+		
+		atras = new JButton("Atras");
+		atras.setBounds(400, 280, 60, 30);
+		atras.setActionCommand("ATR-SESION");
+		add(atras);
 		
 		camposRegistro = new JTextArea();
 		camposRegistro.setBounds(220, 102, 200, 20);
@@ -87,6 +93,10 @@ public class PanelIniciarSesion extends JPanel {
 		registros[b].setIcon(icon);
 		registros[b].setBounds(x,y,xB,yB);
 		add(registros[b]);
+	}
+	public void reiniciarTextos() {
+		camposRegistro.setText(null);
+		contrasena.setText(null);
 	}
 	/**
 	 * @return el olvidarContra
@@ -159,5 +169,17 @@ public class PanelIniciarSesion extends JPanel {
 	 */
 	public void setRegistrar(JButton registrar) {
 		this.registrar = registrar;
+	}
+	/**
+	 * @return el atras
+	 */
+	public JButton getAtras() {
+		return atras;
+	}
+	/**
+	 * @param atras el atras a establecer
+	 */
+	public void setAtras(JButton atras) {
+		this.atras = atras;
 	}
 }

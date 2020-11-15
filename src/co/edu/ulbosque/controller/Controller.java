@@ -4,15 +4,63 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import co.edu.ulbosque.model.Correo;
+import co.edu.ulbosque.model.Usuario;
+import co.edu.ulbosque.model.persistence.UsuarioDAO;
 import co.edu.unbosque.view.VentanaPrincipal;
 
 public class Controller implements ActionListener {
 	private VentanaPrincipal vista;
+	private UsuarioDAO usuarioDAO;
 
 	public Controller() {
+		usuarioDAO = new UsuarioDAO();
 		vista = new VentanaPrincipal();
 		asignarOyentes();
+	}
+	public boolean enviarCorreo(Correo c) {
+		try {
+			Properties p = System.getProperties();
+			p.setProperty("mail.smtp.transport.protocol", "smtp.gmail.com");
+			p.setProperty("mail.smtp.port", "587");
+			p.put("mail.smtp.host", "smtp.gmail.com"); 
+			p.setProperty("mail.smtp.starttls.enable", "true");
+			p.setProperty("mail.smtp.user", "houseappinc@gmail.com");
+			p.setProperty("mail.smtp.auth", "true");
+			
+			Session s = Session.getDefaultInstance(p);
+			MimeMessage msg = new MimeMessage(s);
+			msg.setFrom(new InternetAddress(c.getFrom()));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(c.getTo()));
+			msg.setSubject(c.getSubject());
+			msg.setText(c.getMensaje());
+			Transport transport = s.getTransport("smtp");
+			try {
+				
+				System.out.println("Enviando mensaje");
+				transport.connect("houseappinc@gmail.com","warzone2020");
+				transport.sendMessage(msg, msg.getAllRecipients());
+				transport.close();
+				System.out.println("Mesnaje enviado");
+				return true;
+			}catch(Exception e) {
+				System.out.println(e.toString());
+				System.out.println("F");
+				return false;
+			}	
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			System.out.println("F");
+			return false;
+		}
 	}
 
 	public void asignarOyentes() {
@@ -29,6 +77,7 @@ public class Controller implements ActionListener {
 		vista.getPanelInicioSesion().getAstro().addActionListener(this);
 		vista.getPanelInicioSesion().getFutbol().addActionListener(this);
 		vista.getPanelInicioSesion().getBaloto().addActionListener(this);
+		vista.getPanelIniciarSesion().getAtras().addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -85,6 +134,41 @@ public class Controller implements ActionListener {
 		} else if (command.equals("FUTBOL")) {
 			vista.getPanelInicioSesion().setVisible(false);
 
+		} else if(command.equals("ATR-SESION")) {
+			vista.getPanelIniciarSesion().setVisible(false);
+			vista.getPanelIniciarSesion().reiniciarTextos();
+			tamanoVentanas(900, 700);
+			cambiarPanel(vista.getPanelInicioSesion());
+		}else if(command.equals("CANCELAR")) {
+			vista.getPanelRegistro().setVisible(false);
+			vista.getPanelIniciarSesion().reiniciarTextos();
+			tamanoVentanas(900, 700);
+			cambiarPanel(vista.getPanelInicioSesion());
+		}else if(command.equals("REGISTRAR")) {
+			String nombre = vista.getPanelRegistro().devolverCampo(0).getText();
+			String telefono = vista.getPanelRegistro().devolverCampo(1).getText();
+			String correo = vista.getPanelRegistro().devolverCampo(2).getText();
+			String documento = vista.getPanelRegistro().devolverCampo(3).getText();
+			String anioN = "";
+			String usuario = vista.getPanelRegistro().devolverCampo(4).getText();
+			@SuppressWarnings("deprecation")
+			String contrasenia = vista.getPanelRegistro().devolverContra(0).getText();
+			@SuppressWarnings("deprecation")
+			String confirmaContra = vista.getPanelRegistro().devolverContra(1).getText();
+			Correo correoAux = new Correo(correo);
+			if(contrasenia.equals(confirmaContra)) {
+				Usuario aux = new Usuario(nombre, correoAux, telefono, usuario, documento, anioN, contrasenia);
+				correoAux.mensajeBienvenida(nombre);
+				enviarCorreo(correoAux);
+				try {
+					usuarioDAO.agregarUsuario(aux);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			usuarioDAO.imprimir();
+			
 		}
 	}
 

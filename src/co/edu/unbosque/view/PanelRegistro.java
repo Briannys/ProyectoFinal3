@@ -118,6 +118,7 @@ public class PanelRegistro extends JPanel {
 		confirmarEdad.setContentAreaFilled(false);
 		add(confirmarEdad);
 		
+		
 		inicializarLabels("<html><div style='text-align:justify;'>" +
 						"<html>Confirmo que tengo 18 años de edad como mínimo. Además, confirmo que he leído y que acepto los términos y condiciones, así como la política de de privacidad que describe el procesamiento de datos con fines legales o legítimos.<br/> </html>" +
 						"</div></html>", 10, 60, 455, 300, 100);
@@ -174,6 +175,12 @@ public class PanelRegistro extends JPanel {
 		this.tipoCedula[pos].setActionCommand(command);
 		this.tipoCedula[pos].setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(this.tipoCedula[pos]);
+	}
+	public JTextArea devolverCampo(int pos) {
+		return camposRegistro[pos];
+	}
+	public JPasswordField devolverContra(int pos) {
+		return contra[pos];
 	}
 	public JButton devolverBoton(int pos) {
 		  return botonesRegistro[pos];

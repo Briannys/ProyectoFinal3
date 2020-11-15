@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class VentanaPrincipal extends JFrame {
+	private PanelIniciarSesion panelIniciarSesion;
 	private PanelPortada panelInicioSesion;
 	private PanelIniciarSesion panelPortada;
 	private PanelRegistro panelRegistro;
@@ -29,6 +30,7 @@ public class VentanaPrincipal extends JFrame {
 		panelInicioSesion = new PanelPortada();
 		//add(panelInicioSesion, BorderLayout.CENTER);
 		getContentPane().add(panelInicioSesion);
+		panelIniciarSesion = new PanelIniciarSesion();
 		panelPortada = new PanelIniciarSesion();
 		panelRegistro = new PanelRegistro();
 		panelOlvidarContra = new PanelOlvidarContra();
@@ -99,5 +101,18 @@ public class VentanaPrincipal extends JFrame {
 	public void setPanelOlvidarContra(PanelOlvidarContra panelOlvidarContra) {
 		this.panelOlvidarContra = panelOlvidarContra;
 	}
-	
+
+	/**
+	 * @return el panelIniciarSesion
+	 */
+	public PanelIniciarSesion getPanelIniciarSesion() {
+		return panelIniciarSesion;
+	}
+
+	/**
+	 * @param panelIniciarSesion el panelIniciarSesion a establecer
+	 */
+	public void setPanelIniciarSesion(PanelIniciarSesion panelIniciarSesion) {
+		this.panelIniciarSesion = panelIniciarSesion;
+	}
 }

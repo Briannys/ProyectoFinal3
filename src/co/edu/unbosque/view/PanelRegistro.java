@@ -114,6 +114,7 @@ public class PanelRegistro extends JPanel {
 		botonesRegistro = new JButton[3];
 		inicializarBotones("REGISTRAR", 0, "Registrar" ,170,570, 100, 25, Color.green);
 		inicializarBotones("CANCELAR", 1, "Cancelar", 330, 570, 100, 25, Color.red);
+		//
 		confirmarEdad= new JCheckBox();
 		confirmarEdad.setBounds(30,460,30,30);
 		confirmarEdad.setContentAreaFilled(false);

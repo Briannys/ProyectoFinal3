@@ -125,6 +125,7 @@ public class PanelRegistro extends JPanel {
 						"<html>Confirmo que tengo 18 años de edad como mínimo. Además, confirmo que he leído y que acepto los términos y condiciones, así como la política de de privacidad que describe el procesamiento de datos con fines legales o legítimos.<br/> </html>" +
 						"</div></html>", 10, 60, 455, 300, 100, Form.NFD);
 		
+		
 		iniciarSesion = new JButton("<HTML><U>Iniciar Sesión</U></HTML>");
 		iniciarSesion.setBounds( 420, 0, 200, 30);
 		iniciarSesion.setContentAreaFilled(false);

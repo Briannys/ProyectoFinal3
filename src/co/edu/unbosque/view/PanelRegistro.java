@@ -43,18 +43,18 @@ public class PanelRegistro extends JPanel {
 	}
 	public void inicializarComponentes() {
 		registros = new JLabel[20];	
-		inicializarLabels("Nombres y Apellidos",0, 60, 60, 200, 100, Form.NFD);
-		inicializarLabels("Teléfono", 1, 60, 120, 100, 60, Form.NFD);
-		inicializarLabels("Correo Electrónico", 2, 60, 160, 140, 60, Form.NFD);
-		inicializarLabels("Año de Nacimiento", 3, 60, 280, 140, 60, Form.NFD);
-		inicializarLabels("Contraseña", 4, 60, 360,140,60, Form.NFD);
-		inicializarLabels("Confirmar Contraseña", 5, 60, 400,140,60, Form.NFD);
-		inicializarLabels("Registrar una nueva cuenta", 6, 160, 20, 290, 60, Form.NFD);
+		inicializarLabels("Nombres y Apellidos",0, 60, 60, 200, 100);
+		inicializarLabels("Teléfono", 1, 60, 120, 100, 60);
+		inicializarLabels("Correo Electrónico", 2, 60, 160, 140, 60);
+		inicializarLabels("Año de Nacimiento", 3, 60, 280, 140, 60);
+		inicializarLabels("Contraseña", 4, 60, 360,140,60);
+		inicializarLabels("Confirmar Contraseña", 5, 60, 400,140,60);
+		inicializarLabels("Registrar una nueva cuenta", 6, 160, 20, 290, 60);
 		registros[6].setFont(new Font("Century Gothic", 0, 20));
-		inicializarLabels("Número de Documento", 7,60, 240, 140, 60, Form.NFD);
-		inicializarLabels("Nombre de Usuario",8, 60, 320, 140, 60, Form.NFD);
-		inicializarLabels("Tipo de Documento", 9,60, 200, 140, 60,Form.NFD);
-		inicializarLabels("¿Ya tienes una cuenta?", 17, 350, 0, 130, 30,Form.NFD);
+		inicializarLabels("Número de Documento", 7,60, 240, 140, 60);
+		inicializarLabels("Nombre de Usuario",8, 60, 320, 140, 60);
+		inicializarLabels("Tipo de Documento", 9,60, 200, 140, 60);
+		inicializarLabels("¿Ya tienes una cuenta?", 17, 350, 0, 130, 30);
 		registros[17].setFont(new Font("Century Gothic", 3, 11));
 		
 		devolverImagenLabel("HOUSEBEAT", "png", 140, 160, 7, -8,-60,140,160);
@@ -107,9 +107,9 @@ public class PanelRegistro extends JPanel {
 		inicializarJPassword(0,  220, 380, 200, 20);
 		inicializarJPassword(1, 220, 420, 200, 20);
 		tipoCedula = new JRadioButton[4];
-		inicializarBotonesCedula("<html><h5>CC Ciudadanía</h5></html>", 0,"CIUDADANIA", 220, 215, 120, 30, Form.NFD);
-		inicializarBotonesCedula("<html><h5>CC Extranjería</h5></html>", 1, "EXTRANJERIA", 340, 215, 120, 30, Form.NFD);
-		inicializarBotonesCedula("<html><h5>Pasaporte</h5></html>", 2, "PASAPORTE", 460, 215, 120, 30, Form.NFD);
+		inicializarBotonesCedula("<html><h5>CC Ciudadanía</h5></html>", 0,"CIUDADANIA", 220, 215, 120, 30);
+		inicializarBotonesCedula("<html><h5>CC Extranjería</h5></html>", 1, "EXTRANJERIA", 340, 215, 120, 30);
+		inicializarBotonesCedula("<html><h5>Pasaporte</h5></html>", 2, "PASAPORTE", 460, 215, 120, 30);
 		
 		botonesRegistro = new JButton[3];
 		inicializarBotones("REGISTRAR", 0, "Registrar" ,170,570, 100, 25, Color.green);
@@ -123,7 +123,7 @@ public class PanelRegistro extends JPanel {
 		
 		inicializarLabels("<html><div style='text-align:justify;'>" +
 						"<html>Confirmo que tengo 18 años de edad como mínimo. Además, confirmo que he leído y que acepto los términos y condiciones, así como la política de privacidad que describe el procesamiento de datos con fines legales o legítimos.<br/> </html>" +
-						"</div></html>", 10, 60, 455, 300, 100, Form.NFD);
+						"</div></html>", 10, 60, 455, 300, 100);
 		
 		
 		iniciarSesion = new JButton("<HTML><U>Iniciar Sesión</U></HTML>");
@@ -136,7 +136,7 @@ public class PanelRegistro extends JPanel {
 		add(iniciarSesion);
 		
 	}
-	public void inicializarLabels(String tipoRegistro, int pos, int x, int y, int xB, int yB, Form nfd) {
+	public void inicializarLabels(String tipoRegistro, int pos, int x, int y, int xB, int yB) {
 		registros[pos]= new JLabel(tipoRegistro);
 		registros[pos].setVisible(true);
 		registros[pos].setBounds(x, y, xB, yB);
@@ -171,7 +171,7 @@ public class PanelRegistro extends JPanel {
 		contra[pos].setBorder(new LineBorder(Color.black));
 		add(contra[pos]);
 	}
-	public void inicializarBotonesCedula(String tipoCedula, int pos, String command, int x, int y, int xB, int yB, Form nfd) {
+	public void inicializarBotonesCedula(String tipoCedula, int pos, String command, int x, int y, int xB, int yB) {
 		this.tipoCedula[pos]= new JRadioButton(tipoCedula);
 		this.tipoCedula[pos].setBounds(x,y,xB,yB);
 		this.tipoCedula[pos].setContentAreaFilled(false);

@@ -3,7 +3,6 @@ package co.edu.ulbosque.controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -155,6 +154,27 @@ public class Controller implements ActionListener {
 			String contrasenia = vista.getPanelRegistro().devolverContra(0).getText();
 			@SuppressWarnings("deprecation")
 			String confirmaContra = vista.getPanelRegistro().devolverContra(1).getText();
+//			if (comprobarCamposRegistro() == false ) {
+//				vista.capturarMnesaje("Campos Vacíos");
+//				} else 
+//					if (validarCampos() == 1) {
+//					vista.capturarMnesaje("ERROR estas ingresando numeros en un campo de letras");
+//				}else if (validarCampos() == 2) {
+//					vista.capturarMnesaje("ERROR estas ingresando letras en un campo de numeros");
+//				}else if (validarCampos() == 3) {
+//					vista.capturarMnesaje("Error en el correo");
+//				}else if (validarCampos() == 4) {
+//					vista.capturarMnesaje("ERROR");
+//				}else if (validarCampos() == 5) {
+//					vista.capturarMnesaje("ERROR las contraseñas no son iguales");
+//				}else if (validarCampos() == 6) {
+//					vista.capturarMnesaje("ERROR en el nombre");
+//				}else if (validarCampos() == 7) {
+//					vista.capturarMnesaje("ERROR debes leer los términos y condiciones");
+//				}else if (validarCampos() == 8) {
+//					cambiarPanel(vista.getPanelIniciarSesion());
+//					tamanoVentanas(500, 350);
+//				}
 			Correo correoAux = new Correo(correo);
 			if(contrasenia.equals(confirmaContra)) {
 				Usuario aux = new Usuario(nombre, correoAux, telefono, usuario, documento, anioN, contrasenia);
@@ -167,8 +187,16 @@ public class Controller implements ActionListener {
 					e1.printStackTrace();
 				}
 			}
-			usuarioDAO.imprimir();
-			
+			try {
+				if (usuarioDAO.comprobarNombreUsuario(usuario)) {
+					String m= "";
+					m = "ya hay un usuario";
+				}
+			} catch (ClassNotFoundException e1) {
+				// TODO Bloque catch generado automáticamente
+				e1.printStackTrace();
+			}
+			usuarioDAO.imprimir();	
 		}
 	}
 
@@ -189,4 +217,94 @@ public class Controller implements ActionListener {
 		vista.setSize(x, y);
 		vista.setLocationRelativeTo(null);
 	}
+	public boolean comprobarNumerosLetras(String m) {
+		if(m.length()>9) {
+			float numero = 0;
+			try {
+				numero = Float.parseFloat(m);
+				if(numero<0) {
+					return false;
+				}
+				return true;
+			}catch(NumberFormatException e) {
+				return false;
+			}
+		}else {
+			int numero = 0;
+			try {
+				numero = Integer.parseInt(m);
+				if(numero<1) {
+					return false;
+				}
+				return true;			
+			}catch(NumberFormatException e) {
+				return false;
+			}
+		}
+	}
+	public boolean comprobarCamposRegistro() {
+		char[] pass = new char[1];
+		String comprobarJText = "";
+			for (int j = 0; j < 4; j++) {
+				comprobarJText = vista.getPanelRegistro().devolverCampo(j).getText();
+				}
+			if (comprobarJText.length() == 0) {
+				return false;
+			}else {
+				for (int k = 0; k < 2; k++) {
+					pass = vista.getPanelRegistro().devolverContra(k).getPassword();
+					comprobarJText = new String(pass);
+				}
+				if (comprobarJText.length() == 0) {
+					return false;
+				}else {
+						if (!vista.getPanelRegistro().devolverRadioButton(0).isSelected() && !vista.getPanelRegistro().devolverRadioButton(1).isSelected() &&
+								!vista.getPanelRegistro().devolverRadioButton(2).isSelected()) {
+							return false;
+						}else {
+							return true;
+					}	
+				}
+				
+			}
+	}
+	@SuppressWarnings("deprecation")
+	public int validarCampos() {
+		String  [] comprobarJText = new String [4];
+		String contra = vista.getPanelRegistro().devolverContra(0).getText();
+		String confirmarContra = vista.getPanelRegistro().devolverContra(1).getText();
+		for (int j = 0; j < 4; j++) {
+			comprobarJText[j] = vista.getPanelRegistro().devolverCampo(j).getText();
+		}
+		if (comprobarNumerosLetras(comprobarJText[0])) {
+		
+			return 1;
+		}else if (!comprobarNumerosLetras(comprobarJText[1]) || !comprobarNumerosLetras(comprobarJText[3])) {
+			return 2;
+		}else if (comprobarJText[1].length() < 10 || comprobarJText[1].length() > 10 || comprobarJText[3].length() < 10 || comprobarJText[3].length() > 10) {
+			return 4;
+		}else if (!contra.equals(confirmarContra)) {
+			return 5;
+		}else if (vista.getPanelRegistro().getConfirmarEdad().isSelected() == false) {
+			return 7;
+		}else {
+			char aux;
+			char aux2;
+			for (int i = 0; i < comprobarJText[2].length(); i++) {
+				aux = comprobarJText[2].charAt(i);
+				if (aux == '@') {
+					return 3;
+				}
+			}
+			for (int i = 0; i < comprobarJText[0].length(); i++) {
+				aux2 = comprobarJText[0].charAt(i);
+				if (aux2 == '@' || aux2 == '.' || aux2 == '<' || aux2== '>' || aux2 == '-' || aux2 == '_' ) {
+					return 6;
+				}
+			}
+		}
+	return 8;
+	}
+	
+	
 }

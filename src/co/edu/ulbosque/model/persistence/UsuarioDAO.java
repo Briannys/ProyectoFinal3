@@ -27,7 +27,14 @@ public class UsuarioDAO {
 			System.out.println(a.toString());
 		}
 	}
-	
-	
+	public boolean comprobarNombreUsuario(String usuario) throws ClassNotFoundException {
+		usuarios = operacion.obtener();
+		for(Usuario a:usuarios) {
+			if(a.getUsuario().equals(usuario)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

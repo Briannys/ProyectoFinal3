@@ -36,16 +36,15 @@ public class VentanaPrincipal extends JFrame {
 		panelOlvidarContra = new PanelOlvidarContra();
 	}
 	
+	public void capturarMnesaje(String m) {
+		UIManager.put("OptionPane.background", Color.white);
+		UIManager.put("Panel.background", Color.white);
+		UIManager.put("Button.background", Color.white);
+		UIManager.put("OptionPane.messageForeground", Color.black);
+		JOptionPane.showMessageDialog(null, m);
+	}
+
 	
-
-	public PanelPortada getPanelInicioSesion() {
-		return panelInicioSesion;
-	}
-
-	public void setPanelInicioSesion(PanelPortada panelInicioSesion) {
-		this.panelInicioSesion = panelInicioSesion;
-	}
-
 	public void mensajeInformativo() {
 		String[] options = { "Administrador", "Jugador" };
 		int seleccion = JOptionPane.showOptionDialog(null, "Tipo de persona", "Titulo", JOptionPane.DEFAULT_OPTION,
@@ -58,6 +57,14 @@ public class VentanaPrincipal extends JFrame {
 
 		}
 	}
+	public PanelPortada getPanelInicioSesion() {
+		return panelInicioSesion;
+	}
+
+	public void setPanelInicioSesion(PanelPortada panelInicioSesion) {
+		this.panelInicioSesion = panelInicioSesion;
+	}
+
 	/**
 	 * @return el panelRegistro
 	 */

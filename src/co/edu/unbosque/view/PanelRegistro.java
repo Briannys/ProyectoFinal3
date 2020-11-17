@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
 import java.text.DateFormat;
+import java.text.Normalizer.Form;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,18 +43,18 @@ public class PanelRegistro extends JPanel {
 	}
 	public void inicializarComponentes() {
 		registros = new JLabel[20];	
-		inicializarLabels("Nombres y Apellidos",0, 60, 60, 200, 100);
-		inicializarLabels("Telefono", 1, 60, 120, 100, 60);
-		inicializarLabels("Correo Electronico", 2, 60, 160, 140, 60);
-		inicializarLabels("Año de Nacimiento", 3, 60, 280, 140, 60);
-		inicializarLabels("Contraseña", 4, 60, 360,140,60);
-		inicializarLabels("Confirmar Contraseña", 5, 60, 400,140,60);
-		inicializarLabels("Registrar una nueva cuenta", 6, 160, 20, 290, 60);
+		inicializarLabels("Nombres y Apellidos",0, 60, 60, 200, 100, Form.NFD);
+		inicializarLabels("Telefono", 1, 60, 120, 100, 60, Form.NFD);
+		inicializarLabels("Correo Electronico", 2, 60, 160, 140, 60, Form.NFD);
+		inicializarLabels("Año de Nacimiento", 3, 60, 280, 140, 60, Form.NFD);
+		inicializarLabels("Contraseña", 4, 60, 360,140,60, Form.NFD);
+		inicializarLabels("Confirmar Contraseña", 5, 60, 400,140,60, Form.NFD);
+		inicializarLabels("Registrar una nueva cuenta", 6, 160, 20, 290, 60, Form.NFD);
 		registros[6].setFont(new Font("Century Gothic", 0, 20));
-		inicializarLabels("Numero de Documento", 7,60, 240, 140, 60);
-		inicializarLabels("Nombre de Usuario",8, 60, 320, 140, 60);
-		inicializarLabels("Tipo de Documento", 9,60, 200, 140, 60);
-		inicializarLabels("¿Ya tienes una cuenta?", 17, 350, 0, 130, 30);
+		inicializarLabels("Numero de Documento", 7,60, 240, 140, 60, Form.NFD);
+		inicializarLabels("Nombre de Usuario",8, 60, 320, 140, 60, Form.NFD);
+		inicializarLabels("Tipo de Documento", 9,60, 200, 140, 60,Form.NFD);
+		inicializarLabels("¿Ya tienes una cuenta?", 17, 350, 0, 130, 30,Form.NFD);
 		registros[17].setFont(new Font("Century Gothic", 3, 11));
 		
 		devolverImagenLabel("HOUSEBEAT", "png", 140, 160, 7, -8,-60,140,160);
@@ -121,7 +122,7 @@ public class PanelRegistro extends JPanel {
 		
 		inicializarLabels("<html><div style='text-align:justify;'>" +
 						"<html>Confirmo que tengo 18 años de edad como mínimo. Además, confirmo que he leído y que acepto los términos y condiciones, así como la política de de privacidad que describe el procesamiento de datos con fines legales o legítimos.<br/> </html>" +
-						"</div></html>", 10, 60, 455, 300, 100);
+						"</div></html>", 10, 60, 455, 300, 100, Form.NFD);
 		
 		iniciarSesion = new JButton("<HTML><U>Iniciar Sesión</U></HTML>");
 		iniciarSesion.setBounds( 420, 0, 200, 30);
@@ -133,7 +134,7 @@ public class PanelRegistro extends JPanel {
 		add(iniciarSesion);
 		
 	}
-	public void inicializarLabels(String tipoRegistro, int pos, int x, int y, int xB, int yB) {
+	public void inicializarLabels(String tipoRegistro, int pos, int x, int y, int xB, int yB, Form nfd) {
 		registros[pos]= new JLabel(tipoRegistro);
 		registros[pos].setVisible(true);
 		registros[pos].setBounds(x, y, xB, yB);

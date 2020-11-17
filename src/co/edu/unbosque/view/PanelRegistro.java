@@ -68,7 +68,7 @@ public class PanelRegistro extends JPanel {
 		devolverImagenLabel("user", "png", 20, 20, 15,30, 265, 100, 170 );
 		devolverImagenLabel("cedula", "png", 20, 20, 16, 30, 185, 100, 170);
 		
-		calendar1 = new JDateChooser("25/11/2002", "##/##/####", '_');
+		calendar1 = new JDateChooser("dd/MM/yyyy", "##/##/####", '_');
 		calendar1.setBounds(220,300,100,20);
 		calendar1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		calendar1.setBorder(new LineBorder(Color.black));

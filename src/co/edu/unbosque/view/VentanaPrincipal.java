@@ -14,12 +14,12 @@ public class VentanaPrincipal extends JFrame {
 	private PanelIniciarSesion panelPortada;
 	private PanelRegistro panelRegistro;
 	private PanelOlvidarContra panelOlvidarContra;
-	
+	private PanelDecisionAdminUser panelDecisionAdminUser;
 	public VentanaPrincipal() {
 		setTitle("Casa de Apuestas");
 		setSize(900, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setBackground(Color.LIGHT_GRAY);
+		setResizable(false);
 		getContentPane().setLayout(new BorderLayout(10, 10));
 		inicializarComponentes();
 		setLocationRelativeTo(null);
@@ -34,6 +34,7 @@ public class VentanaPrincipal extends JFrame {
 		panelPortada = new PanelIniciarSesion();
 		panelRegistro = new PanelRegistro();
 		panelOlvidarContra = new PanelOlvidarContra();
+		panelDecisionAdminUser = new PanelDecisionAdminUser();
 	}
 	
 	public void capturarMnesaje(String m) {
@@ -121,5 +122,19 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public void setPanelIniciarSesion(PanelIniciarSesion panelIniciarSesion) {
 		this.panelIniciarSesion = panelIniciarSesion;
+	}
+
+	/**
+	 * @return el panelDecisionAdminUser
+	 */
+	public PanelDecisionAdminUser getPanelDecisionAdminUser() {
+		return panelDecisionAdminUser;
+	}
+
+	/**
+	 * @param panelDecisionAdminUser el panelDecisionAdminUser a establecer
+	 */
+	public void setPanelDecisionAdminUser(PanelDecisionAdminUser panelDecisionAdminUser) {
+		this.panelDecisionAdminUser = panelDecisionAdminUser;
 	}
 }

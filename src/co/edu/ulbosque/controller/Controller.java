@@ -114,7 +114,8 @@ public class Controller implements ActionListener {
 				cambiarPanel(vista.getPanelOlvidarContra());
 			}else if (command.equals("REGISTRATE")) {
 				tamanoVentanas(600, 650);
-				cambiarPanel(vista.getPanelRegistro());
+				tamanoVentanas(550, 400);
+				cambiarPanel(vista.getPanelDecisionAdminUser());
 			}else if (command.equals("INICIARSESIONREGISTRAR")) {
 				tamanoVentanas(500, 350);
 				cambiarPanel(vista.getPanelPortada());
@@ -155,7 +156,7 @@ public class Controller implements ActionListener {
 			@SuppressWarnings("deprecation")
 			String confirmaContra = vista.getPanelRegistro().devolverContra(1).getText();
 //			if (comprobarCamposRegistro() == false ) {
-//				vista.capturarMnesaje("Campos Vacíos");
+//				vista.capturarMnesaje("Campos Vacï¿½os");
 //				} else 
 //					if (validarCampos() == 1) {
 //					vista.capturarMnesaje("ERROR estas ingresando numeros en un campo de letras");
@@ -166,11 +167,11 @@ public class Controller implements ActionListener {
 //				}else if (validarCampos() == 4) {
 //					vista.capturarMnesaje("ERROR");
 //				}else if (validarCampos() == 5) {
-//					vista.capturarMnesaje("ERROR las contraseñas no son iguales");
+//					vista.capturarMnesaje("ERROR las contraseï¿½as no son iguales");
 //				}else if (validarCampos() == 6) {
 //					vista.capturarMnesaje("ERROR en el nombre");
 //				}else if (validarCampos() == 7) {
-//					vista.capturarMnesaje("ERROR debes leer los términos y condiciones");
+//					vista.capturarMnesaje("ERROR debes leer los tï¿½rminos y condiciones");
 //				}else if (validarCampos() == 8) {
 //					cambiarPanel(vista.getPanelIniciarSesion());
 //					tamanoVentanas(500, 350);
@@ -193,7 +194,7 @@ public class Controller implements ActionListener {
 					m = "ya hay un usuario";
 				}
 			} catch (ClassNotFoundException e1) {
-				// TODO Bloque catch generado automáticamente
+				// TODO Bloque catch generado automï¿½ticamente
 				e1.printStackTrace();
 			}
 			usuarioDAO.imprimir();	

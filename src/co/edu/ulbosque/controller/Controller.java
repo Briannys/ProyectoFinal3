@@ -77,6 +77,9 @@ public class Controller implements ActionListener {
 		vista.getPanelInicioSesion().getFutbol().addActionListener(this);
 		vista.getPanelInicioSesion().getBaloto().addActionListener(this);
 		vista.getPanelIniciarSesion().getAtras().addActionListener(this);
+		vista.getPanelDecisionAdminUser().getUser().addActionListener(this);
+		vista.getPanelDecisionAdminUser().getAdmin().addActionListener(this);
+	
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -119,6 +122,9 @@ public class Controller implements ActionListener {
 			}else if (command.equals("INICIARSESIONREGISTRAR")) {
 				tamanoVentanas(500, 350);
 				cambiarPanel(vista.getPanelPortada());
+			}else if (command.equals("USERD")) {
+				tamanoVentanas(600, 650);
+				cambiarPanel(vista.getPanelRegistro());
 			}else if (command.equals("INICIARSESION")) {
 			System.out.println(command);
 			tamanoVentanas(500, 350);

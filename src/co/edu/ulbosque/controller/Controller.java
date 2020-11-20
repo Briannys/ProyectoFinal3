@@ -14,6 +14,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 
@@ -189,6 +190,12 @@ public class Controller implements ActionListener {
 
 			} else if (validarUsuario(user, password) == 2) { // si es user
 				System.out.println("Es user");
+				tamanoVentanas(900, 700);
+				vista.getPanelPortada().quitarInicioSecion(0);
+				vista.getPanelPortada().getHolix().setText("Bienvenido " + user);
+				vista.getPanelPortada().activarJuegos();
+				cambiarPanel(vista.getPanelPortada());
+
 			} else if (validarUsuario(user, password) == 0) { // si no existe
 				System.out.println("No esta registrado");
 			}
@@ -280,6 +287,8 @@ public class Controller implements ActionListener {
 			usuarioDAO.imprimir();
 
 		} else if (command.equals("REGISTRAR_ADMIN")) {
+
+			casaApuesta.getAdminDAO().leerAdmnins();
 
 			String nombre = vista.getPanelRegistroAdmin().devolverCampo(0).getText();
 			String telefono = vista.getPanelRegistroAdmin().devolverCampo(1).getText();

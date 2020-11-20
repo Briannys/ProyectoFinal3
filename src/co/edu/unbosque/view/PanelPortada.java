@@ -14,6 +14,7 @@ public class PanelPortada extends JPanel {
 	private JLabel l1, l2, lbalo, lsupe, lfutbol;
 	private JButton login, reg, baloto, astro, futbol;
 	private JPanel inicio, juegos;
+	private JLabel holix;
 
 	public PanelPortada() {
 		setLayout(null);
@@ -57,18 +58,18 @@ public class PanelPortada extends JPanel {
 		devolverImagenLabel("house_beat_logo", "png", 160, 80, l1);
 		l1.setBounds(10, 15, 160, 80);
 		inicio.add(l1);
-		
-		
+
 		juegos = new JPanel();
-		juegos.setBounds(5,113, 875, 545);
+		juegos.setBounds(5, 113, 875, 545);
 		juegos.setLayout(null);
 		juegos.setVisible(true);
-		juegos.setBackground(new Color(3,6, 97));
+		juegos.setBackground(new Color(3, 6, 97));
 		add(juegos);
-		
+
 		baloto = new JButton(devolverImagenButton("Baloto", "gif", 220, 300));
 		baloto.setBounds(60, 100, 220, 300);
 		baloto.setActionCommand("BALOTO");
+		baloto.setEnabled(false);
 		baloto.setBackground(Color.WHITE);
 		juegos.add(baloto);
 
@@ -81,6 +82,7 @@ public class PanelPortada extends JPanel {
 		astro = new JButton(devolverImagenButton("super", "gif", 220, 300));
 		astro.setBackground(Color.WHITE);
 		astro.setActionCommand("SUPERASTRO");
+		astro.setEnabled(false);
 		astro.setBounds(330, 100, 220, 300);
 		juegos.add(astro);
 
@@ -93,6 +95,7 @@ public class PanelPortada extends JPanel {
 		futbol = new JButton(devolverImagenButton("futbol", "gif", 220, 300));
 		futbol.setBackground(Color.WHITE);
 		futbol.setActionCommand("FUTBOL");
+		futbol.setEnabled(false);
 		futbol.setBounds(600, 100, 220, 300);
 		juegos.add(futbol);
 
@@ -103,8 +106,14 @@ public class PanelPortada extends JPanel {
 		lfutbol.setBounds(620, 60, 240, 40);
 		juegos.add(lfutbol);
 		
+		holix = new JLabel();
+		holix.setVisible(false);
+		holix.setForeground(new Color(3, 6, 97));
+		holix.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		holix.setBounds(540, 35, 300, 30);
+		inicio.add(holix);
+
 	}
-	
 
 	public void devolverImagenLabel(String src, String tipo, int escalax, int escalay, JLabel b) {
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/imagenes/" + src + "." + tipo));
@@ -118,6 +127,24 @@ public class PanelPortada extends JPanel {
 		return icon;
 	}
 
+	public void activarJuegos() {
+		futbol.setEnabled(true);
+		baloto.setEnabled(true);
+		astro.setEnabled(true);
+	}
+	
+
+	public void quitarInicioSecion(int a) {
+		boolean temp = false;
+
+		if (a == 1) {
+			temp = true;
+		}
+		reg.setVisible(temp);
+		login.setVisible(temp);
+		holix.setVisible(true);
+		
+	}
 
 	public void setJuegos(JPanel juegos) {
 		this.juegos = juegos;
@@ -283,7 +310,19 @@ public class PanelPortada extends JPanel {
 	public JPanel getJuegos() {
 		return juegos;
 	}
-	
-	
-	
+
+	/**
+	 * @return the holix
+	 */
+	public JLabel getHolix() {
+		return holix;
+	}
+
+	/**
+	 * @param holix the holix to set
+	 */
+	public void setHolix(JLabel holix) {
+		this.holix = holix;
+	}
+
 }

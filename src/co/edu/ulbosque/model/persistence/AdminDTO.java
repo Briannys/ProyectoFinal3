@@ -1,8 +1,12 @@
-	package co.edu.ulbosque.model;
+package co.edu.ulbosque.model.persistence;
 
 import java.io.Serializable;
 
-public class Usuario extends Persona implements Serializable {
+import co.edu.ulbosque.model.Correo;
+import co.edu.ulbosque.model.Persona;
+import co.edu.ulbosque.model.Usuario;
+
+public class AdminDTO extends Persona implements Serializable {
 
 	private String nombre = "";
 	private Correo correo = null;
@@ -12,31 +16,17 @@ public class Usuario extends Persona implements Serializable {
 	private String fechaNacimiento = "";
 	private String contrasenia = "";
 
-	public Usuario() {
+	public AdminDTO(String nombre, Correo correo, String telefono, String usuario, String documento,
+			String fechaNacimiento, String contraseña) {
 
-	}
-
-	public Usuario(String n) {
-		nombre = n;
-	}
-
-	public Usuario(String nombre, Correo correo, String telefono, String usuario, String documento,
-			String fechaNacimiento, String contrasenia) {
-		
 		super.nombre = this.nombre = nombre;
 		super.correo = this.correo = correo;
 		super.telefono = this.telefono = telefono;
 		super.usuario = this.usuario = usuario;
 		super.documento = this.documento = documento;
 		super.fechaNacimiento = this.fechaNacimiento = fechaNacimiento;
-		super.contrasenia = this.contrasenia = contrasenia;
-	}
+		super.contrasenia = this.contrasenia = contraseña;
 
-	@Override
-	public String toString() {
-		return "Nombre: " + nombre + "\nCorreo: " + correo.getTo() + "\nTelefono: " + telefono + "\nUsuario: " + usuario
-				+ "\nDocumento: " + documento + "\nFecha Nacimiento: " + fechaNacimiento + "\nContrasenia: "
-				+ contrasenia + "\n";
 	}
 
 	/**
@@ -135,6 +125,13 @@ public class Usuario extends Persona implements Serializable {
 	 */
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
+	}
+
+	@Override
+	public String toString() {
+		return "nombre= " + nombre + ", correo= " + correo + ", telefono= " + telefono + ", usuario= " + usuario
+				+ ", documento= " + documento + ", fechaNacimiento= " + fechaNacimiento + ", contrasenia= "
+				+ contrasenia;
 	}
 
 }

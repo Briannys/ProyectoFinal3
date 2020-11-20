@@ -10,11 +10,13 @@ import javax.swing.UIManager;
 
 public class VentanaPrincipal extends JFrame {
 	private PanelIniciarSesion panelIniciarSesion;
-	private PanelPortada panelInicioSesion;
-	private PanelIniciarSesion panelPortada;
+	private PanelPortada panelPortada;
 	private PanelRegistro panelRegistro;
 	private PanelOlvidarContra panelOlvidarContra;
 	private PanelDecisionAdminUser panelDecisionAdminUser;
+	private PanelRegistroAdmin panelRegistroAdmin;
+	private PanelControlAdmin panelControlAdmin;
+
 	public VentanaPrincipal() {
 		setTitle("Casa de Apuestas");
 		setSize(900, 700);
@@ -27,16 +29,17 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void inicializarComponentes() {
-		panelInicioSesion = new PanelPortada();
-		//add(panelInicioSesion, BorderLayout.CENTER);
-		getContentPane().add(panelInicioSesion);
+		panelPortada = new PanelPortada();
+		// add(panelInicioSesion, BorderLayout.CENTER);
+		getContentPane().add(panelPortada);
 		panelIniciarSesion = new PanelIniciarSesion();
-		panelPortada = new PanelIniciarSesion();
 		panelRegistro = new PanelRegistro();
 		panelOlvidarContra = new PanelOlvidarContra();
 		panelDecisionAdminUser = new PanelDecisionAdminUser();
+		panelRegistroAdmin = new PanelRegistroAdmin();
+		panelControlAdmin =  new PanelControlAdmin();
 	}
-	
+
 	public void capturarMnesaje(String m) {
 		UIManager.put("OptionPane.background", Color.white);
 		UIManager.put("Panel.background", Color.white);
@@ -45,7 +48,6 @@ public class VentanaPrincipal extends JFrame {
 		JOptionPane.showMessageDialog(null, m);
 	}
 
-	
 	public void mensajeInformativo() {
 		String[] options = { "Administrador", "Jugador" };
 		int seleccion = JOptionPane.showOptionDialog(null, "Tipo de persona", "Titulo", JOptionPane.DEFAULT_OPTION,
@@ -58,83 +60,110 @@ public class VentanaPrincipal extends JFrame {
 
 		}
 	}
-	public PanelPortada getPanelInicioSesion() {
-		return panelInicioSesion;
-	}
-
-	public void setPanelInicioSesion(PanelPortada panelInicioSesion) {
-		this.panelInicioSesion = panelInicioSesion;
-	}
 
 	/**
-	 * @return el panelRegistro
-	 */
-	public PanelRegistro getPanelRegistro() {
-		return panelRegistro;
-	}
-
-	/**
-	 * @param panelRegistro el panelRegistro a establecer
-	 */
-	public void setPanelRegistro(PanelRegistro panelRegistro) {
-		this.panelRegistro = panelRegistro;
-	}
-
-	
-
-	/**
-	 * @return the panelPortada
-	 */
-	public PanelIniciarSesion getPanelPortada() {
-		return panelPortada;
-	}
-
-	/**
-	 * @param panelPortada the panelPortada to set
-	 */
-	public void setPanelPortada(PanelIniciarSesion panelPortada) {
-		this.panelPortada = panelPortada;
-	}
-
-	/**
-	 * @return el panelOlvidarContra
-	 */
-	public PanelOlvidarContra getPanelOlvidarContra() {
-		return panelOlvidarContra;
-	}
-
-	/**
-	 * @param panelOlvidarContra el panelOlvidarContra a establecer
-	 */
-	public void setPanelOlvidarContra(PanelOlvidarContra panelOlvidarContra) {
-		this.panelOlvidarContra = panelOlvidarContra;
-	}
-
-	/**
-	 * @return el panelIniciarSesion
+	 * @return the panelIniciarSesion
 	 */
 	public PanelIniciarSesion getPanelIniciarSesion() {
 		return panelIniciarSesion;
 	}
 
 	/**
-	 * @param panelIniciarSesion el panelIniciarSesion a establecer
+	 * @param panelIniciarSesion the panelIniciarSesion to set
 	 */
 	public void setPanelIniciarSesion(PanelIniciarSesion panelIniciarSesion) {
 		this.panelIniciarSesion = panelIniciarSesion;
 	}
 
 	/**
-	 * @return el panelDecisionAdminUser
+	 * @return the panelPortada
+	 */
+	public PanelPortada getPanelPortada() {
+		return panelPortada;
+	}
+
+	/**
+	 * @param panelPortada the panelPortada to set
+	 */
+	public void setPanelPortada(PanelPortada panelPortada) {
+		this.panelPortada = panelPortada;
+	}
+
+	/**
+	 * @return the panelRegistro
+	 */
+	public PanelRegistro getPanelRegistro() {
+		return panelRegistro;
+	}
+
+	/**
+	 * @param panelRegistro the panelRegistro to set
+	 */
+	public void setPanelRegistro(PanelRegistro panelRegistro) {
+		this.panelRegistro = panelRegistro;
+	}
+
+	/**
+	 * @return the panelOlvidarContra
+	 */
+	public PanelOlvidarContra getPanelOlvidarContra() {
+		return panelOlvidarContra;
+	}
+
+	/**
+	 * @param panelOlvidarContra the panelOlvidarContra to set
+	 */
+	public void setPanelOlvidarContra(PanelOlvidarContra panelOlvidarContra) {
+		this.panelOlvidarContra = panelOlvidarContra;
+	}
+
+	/**
+	 * @return the panelDecisionAdminUser
 	 */
 	public PanelDecisionAdminUser getPanelDecisionAdminUser() {
 		return panelDecisionAdminUser;
 	}
 
 	/**
-	 * @param panelDecisionAdminUser el panelDecisionAdminUser a establecer
+	 * @param panelDecisionAdminUser the panelDecisionAdminUser to set
 	 */
 	public void setPanelDecisionAdminUser(PanelDecisionAdminUser panelDecisionAdminUser) {
 		this.panelDecisionAdminUser = panelDecisionAdminUser;
 	}
+
+	/**
+	 * @return the panelRegistroAdmin
+	 */
+	public PanelRegistroAdmin getPanelRegistroAdmin() {
+		return panelRegistroAdmin;
+	}
+
+	/**
+	 * @param panelRegistroAdmin the panelRegistroAdmin to set
+	 */
+	public void setPanelRegistroAdmin(PanelRegistroAdmin panelRegistroAdmin) {
+		this.panelRegistroAdmin = panelRegistroAdmin;
+	}
+
+	/**
+	 * @return the panelControlAdmin
+	 */
+	public PanelControlAdmin getPanelControlAdmin() {
+		return panelControlAdmin;
+	}
+
+	/**
+	 * @param panelControlAdmin the panelControlAdmin to set
+	 */
+	public void setPanelControlAdmin(PanelControlAdmin panelControlAdmin) {
+		this.panelControlAdmin = panelControlAdmin;
+	}
+	
+	public void mostrarMensaje(String m) {
+		JOptionPane.showMessageDialog(null, m);
+	}
+	
+
+
+
 }

@@ -13,42 +13,38 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 public class PanelIniciarSesion extends JPanel {
 	private JButton olvidarContra;
 	private JLabel[] registros;
-	private JTextArea camposRegistro;
+	private JTextField usuario;
 	private JPasswordField contrasena;
 	private JButton ingresar;
 	private JButton registrar;
-	private JButton atras;
+	
 	public PanelIniciarSesion() {
 		setLayout(null);
-		setVisible(false);
+		setVisible(true);
 		setBackground(Color.white);
 		inicializarComponentes();
 	}
 	public void inicializarComponentes() {
 		registros = new JLabel[4];
 		inicializarLabels("Usuario", 0, 60, 100, 100, 30);
-		inicializarLabels("Contraseña", 1, 60, 150, 100, 30);
-		inicializarLabels("Iniciar Sesión", 2, 180, 10, 290, 60);
+		inicializarLabels("ContraseÃ±a", 1, 60, 150, 100, 30);
+		inicializarLabels("Iniciar SesiÃ³n", 2, 180, 10, 290, 60);
 		registros[2].setFont(new Font("Century Gothic", 0, 20));
-		inicializarLabels("¿Aún no tienes cuenta?", 3, 155, 275, 130, 30);
+		inicializarLabels("Â¿AÃºn no tienes cuenta?", 3, 155, 275, 130, 30);
 		registros[3].setFont(new Font("Century Gothic", 1, 11));
 		devolverImagenLabel("user", "png", 20, 20, 2,30, 32, 100, 170 );
 		devolverImagenLabel("contrasena", "png",20, 20, 3, 30, 80, 100, 170);
 		
-		atras = new JButton("Atras");
-		atras.setBounds(400, 280, 60, 30);
-		atras.setActionCommand("ATR-SESION");
-		add(atras);
-		
-		camposRegistro = new JTextArea();
-		camposRegistro.setBounds(220, 102, 200, 20);
-		camposRegistro.setBorder(new LineBorder(Color.black));
-		add(camposRegistro);
+		usuario = new JTextField();
+		usuario.setBounds(220, 102, 200, 20);
+		usuario.setBorder(new LineBorder(Color.black));
+		add(usuario);
 		
 		contrasena = new JPasswordField();
 		contrasena.setBounds(220, 156, 200, 20);
@@ -57,11 +53,12 @@ public class PanelIniciarSesion extends JPanel {
 		
 		ingresar = new JButton("Ingresar");
 		ingresar.setBounds(195,200, 100, 25);
-		ingresar.setActionCommand("INGRESAR");
 		ingresar.setBackground(Color.green);
+		ingresar.setActionCommand("INGRESAR");
 		add(ingresar);
 		
-		olvidarContra = new JButton("<HTML><U>¿Olvidaste la contraseña?</U></HTML>");
+		
+		olvidarContra = new JButton("<HTML><U>Â¿Olvidaste la contraseÃ±a?</U></HTML>");
 		olvidarContra.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		olvidarContra.setBounds(120, 240, 250, 30);
 		olvidarContra.setContentAreaFilled(false);
@@ -94,10 +91,6 @@ public class PanelIniciarSesion extends JPanel {
 		registros[b].setBounds(x,y,xB,yB);
 		add(registros[b]);
 	}
-	public void reiniciarTextos() {
-		camposRegistro.setText(null);
-		contrasena.setText(null);
-	}
 	/**
 	 * @return el olvidarContra
 	 */
@@ -123,16 +116,16 @@ public class PanelIniciarSesion extends JPanel {
 		this.registros = registros;
 	}
 	/**
-	 * @return el camposRegistro
+	 * @return el usuario
 	 */
-	public JTextArea getCamposRegistro() {
-		return camposRegistro;
+	public JTextField getUsuario() {
+		return usuario;
 	}
 	/**
-	 * @param camposRegistro el camposRegistro a establecer
+	 * @param usuario el usuario a establecer
 	 */
-	public void setCamposRegistro(JTextArea camposRegistro) {
-		this.camposRegistro = camposRegistro;
+	public void setUsuario(JTextField usuario) {
+		this.usuario = usuario;
 	}
 	/**
 	 * @return el contrasena
@@ -171,15 +164,8 @@ public class PanelIniciarSesion extends JPanel {
 		this.registrar = registrar;
 	}
 	/**
-	 * @return el atras
+	 * @return el ingresar2
 	 */
-	public JButton getAtras() {
-		return atras;
-	}
-	/**
-	 * @param atras el atras a establecer
-	 */
-	public void setAtras(JButton atras) {
-		this.atras = atras;
-	}
+	
+	
 }

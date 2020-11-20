@@ -15,6 +15,7 @@ public class PanelDecisionAdminUser extends JPanel {
 	private JButton user;
 	private JButton admin;
 	public PanelDecisionAdminUser() {
+		
 		setLayout(null);
 		setVisible(true);
 		setBackground(Color.white);

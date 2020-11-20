@@ -54,7 +54,7 @@ public class PanelPortada extends JPanel {
 		inicio.add(reg);
 
 		l1 = new JLabel();
-		devolverImagenLabel("HOUSEBEAT", "png", 160, 80, l1);
+		devolverImagenLabel("house_beat_logo", "png", 160, 80, l1);
 		l1.setBounds(10, 15, 160, 80);
 		inicio.add(l1);
 		
@@ -118,101 +118,172 @@ public class PanelPortada extends JPanel {
 		return icon;
 	}
 
-	public JLabel getL1() {
-		return l1;
-	}
-
-	public void setL1(JLabel l1) {
-		this.l1 = l1;
-	}
-
-	public JLabel getL2() {
-		return l2;
-	}
-
-	public void setL2(JLabel l2) {
-		this.l2 = l2;
-	}
-
-	public JLabel getLbalo() {
-		return lbalo;
-	}
-
-	public void setLbalo(JLabel lbalo) {
-		this.lbalo = lbalo;
-	}
-
-	public JLabel getLsupe() {
-		return lsupe;
-	}
-
-	public void setLsupe(JLabel lsupe) {
-		this.lsupe = lsupe;
-	}
-
-	public JLabel getLfutbol() {
-		return lfutbol;
-	}
-
-	public void setLfutbol(JLabel lfutbol) {
-		this.lfutbol = lfutbol;
-	}
-
-	public JButton getLogin() {
-		return login;
-	}
-
-	public void setLogin(JButton login) {
-		this.login = login;
-	}
-
-	public JButton getReg() {
-		return reg;
-	}
-
-	public void setReg(JButton reg) {
-		this.reg = reg;
-	}
-
-	public JButton getBaloto() {
-		return baloto;
-	}
-
-	public void setBaloto(JButton baloto) {
-		this.baloto = baloto;
-	}
-
-	public JButton getAstro() {
-		return astro;
-	}
-
-	public void setAstro(JButton astro) {
-		this.astro = astro;
-	}
-
-	public JButton getFutbol() {
-		return futbol;
-	}
-
-	public void setFutbol(JButton futbol) {
-		this.futbol = futbol;
-	}
-
-	public JPanel getInicio() {
-		return inicio;
-	}
-
-	public void setInicio(JPanel inicio) {
-		this.inicio = inicio;
-	}
-
-	public JPanel getJuegos() {
-		return juegos;
-	}
 
 	public void setJuegos(JPanel juegos) {
 		this.juegos = juegos;
 	}
+
+	/**
+	 * @return the l1
+	 */
+	public JLabel getL1() {
+		return l1;
+	}
+
+	/**
+	 * @param l1 the l1 to set
+	 */
+	public void setL1(JLabel l1) {
+		this.l1 = l1;
+	}
+
+	/**
+	 * @return the l2
+	 */
+	public JLabel getL2() {
+		return l2;
+	}
+
+	/**
+	 * @param l2 the l2 to set
+	 */
+	public void setL2(JLabel l2) {
+		this.l2 = l2;
+	}
+
+	/**
+	 * @return the lbalo
+	 */
+	public JLabel getLbalo() {
+		return lbalo;
+	}
+
+	/**
+	 * @param lbalo the lbalo to set
+	 */
+	public void setLbalo(JLabel lbalo) {
+		this.lbalo = lbalo;
+	}
+
+	/**
+	 * @return the lsupe
+	 */
+	public JLabel getLsupe() {
+		return lsupe;
+	}
+
+	/**
+	 * @param lsupe the lsupe to set
+	 */
+	public void setLsupe(JLabel lsupe) {
+		this.lsupe = lsupe;
+	}
+
+	/**
+	 * @return the lfutbol
+	 */
+	public JLabel getLfutbol() {
+		return lfutbol;
+	}
+
+	/**
+	 * @param lfutbol the lfutbol to set
+	 */
+	public void setLfutbol(JLabel lfutbol) {
+		this.lfutbol = lfutbol;
+	}
+
+	/**
+	 * @return the login
+	 */
+	public JButton getLogin() {
+		return login;
+	}
+
+	/**
+	 * @param login the login to set
+	 */
+	public void setLogin(JButton login) {
+		this.login = login;
+	}
+
+	/**
+	 * @return the reg
+	 */
+	public JButton getReg() {
+		return reg;
+	}
+
+	/**
+	 * @param reg the reg to set
+	 */
+	public void setReg(JButton reg) {
+		this.reg = reg;
+	}
+
+	/**
+	 * @return the baloto
+	 */
+	public JButton getBaloto() {
+		return baloto;
+	}
+
+	/**
+	 * @param baloto the baloto to set
+	 */
+	public void setBaloto(JButton baloto) {
+		this.baloto = baloto;
+	}
+
+	/**
+	 * @return the astro
+	 */
+	public JButton getAstro() {
+		return astro;
+	}
+
+	/**
+	 * @param astro the astro to set
+	 */
+	public void setAstro(JButton astro) {
+		this.astro = astro;
+	}
+
+	/**
+	 * @return the futbol
+	 */
+	public JButton getFutbol() {
+		return futbol;
+	}
+
+	/**
+	 * @param futbol the futbol to set
+	 */
+	public void setFutbol(JButton futbol) {
+		this.futbol = futbol;
+	}
+
+	/**
+	 * @return the inicio
+	 */
+	public JPanel getInicio() {
+		return inicio;
+	}
+
+	/**
+	 * @param inicio the inicio to set
+	 */
+	public void setInicio(JPanel inicio) {
+		this.inicio = inicio;
+	}
+
+	/**
+	 * @return the juegos
+	 */
+	public JPanel getJuegos() {
+		return juegos;
+	}
+	
 	
 	
 }

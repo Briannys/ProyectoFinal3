@@ -14,7 +14,6 @@ public class VentanaPrincipal extends JFrame {
 	private PanelRegistro panelRegistro;
 	private PanelOlvidarContra panelOlvidarContra;
 	private PanelDecisionAdminUser panelDecisionAdminUser;
-	private PanelRegistroAdmin panelRegistroAdmin;
 	private PanelControlAdmin panelControlAdmin;
 
 	public VentanaPrincipal() {
@@ -36,7 +35,6 @@ public class VentanaPrincipal extends JFrame {
 		panelRegistro = new PanelRegistro();
 		panelOlvidarContra = new PanelOlvidarContra();
 		panelDecisionAdminUser = new PanelDecisionAdminUser();
-		panelRegistroAdmin = new PanelRegistroAdmin();
 		panelControlAdmin =  new PanelControlAdmin();
 	}
 
@@ -131,19 +129,7 @@ public class VentanaPrincipal extends JFrame {
 		this.panelDecisionAdminUser = panelDecisionAdminUser;
 	}
 
-	/**
-	 * @return the panelRegistroAdmin
-	 */
-	public PanelRegistroAdmin getPanelRegistroAdmin() {
-		return panelRegistroAdmin;
-	}
 
-	/**
-	 * @param panelRegistroAdmin the panelRegistroAdmin to set
-	 */
-	public void setPanelRegistroAdmin(PanelRegistroAdmin panelRegistroAdmin) {
-		this.panelRegistroAdmin = panelRegistroAdmin;
-	}
 
 	/**
 	 * @return the panelControlAdmin

@@ -78,10 +78,8 @@ public class Controller implements ActionListener {
 	public void asignarOyentes() {
 
 		vista.getPanelPortada().getReg().addActionListener(this);
-		vista.getPanelIniciarSesion().getIngresar().addActionListener(this);
-		vista.getPanelRegistroAdmin().getIniciarSesion().addActionListener(this);
 		oyentesBotonesRegistro();
-		oyentesBotonesRegstroAdmin();
+		vista.getPanelIniciarSesion().getIngresar().addActionListener(this);
 		vista.getPanelIniciarSesion().getOlvidarContra().addActionListener(this);
 		vista.getPanelIniciarSesion().getRegistrar().addActionListener(this);
 		vista.getPanelRegistro().devolverRadioButton(0).addActionListener(this);
@@ -133,6 +131,9 @@ public class Controller implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+
+		int flag = 0;
+
 		String command = e.getActionCommand();
 		System.out.println(command);
 		if (command.equals("REGISTRARSE")) {
@@ -165,18 +166,19 @@ public class Controller implements ActionListener {
 		} else if (command.equals("OLVIDARCONTRA")) {
 			tamanoVentanas(500, 350);
 			cambiarPanel(vista.getPanelOlvidarContra());
-		} else if (command.equals("REGISTRATE")) {
 
 		} else if (command.equals("INICIARSESIONREGISTRAR")) { // user
 			tamanoVentanas(500, 350);
 			cambiarPanel(vista.getPanelIniciarSesion());
 		} else if (command.equals("USERD")) { // registro para el usuario
+			flag = 1;
 			tamanoVentanas(600, 650);
 			cambiarPanel(vista.getPanelRegistro());
 
 		} else if (command.equals("ADMIND")) { // registro para el admin
+			flag = 0;
 			tamanoVentanas(600, 650);
-			cambiarPanel(vista.getPanelRegistroAdmin());
+			cambiarPanel(vista.getPanelRegistro());
 
 		} else if (command.equals("INGRESAR")) { // ingresar login
 
@@ -263,68 +265,59 @@ public class Controller implements ActionListener {
 //					cambiarPanel(vista.getPanelIniciarSesion());
 //					tamanoVentanas(500, 350);
 //				}
-			Correo correoAux = new Correo(correo);
-			if (contrasenia.equals(confirmaContra)) {
-				Usuario aux = new Usuario(nombre, correoAux, telefono, usuario, documento, anioN, contrasenia);
-				correoAux.mensajeBienvenida(nombre);
-				enviarCorreo(correoAux);
+
+			if (flag == 1) {
+				Correo correoAux = new Correo(correo);
+				if (contrasenia.equals(confirmaContra)) {
+					Usuario aux = new Usuario(nombre, correoAux, telefono, usuario, documento, anioN, contrasenia);
+					correoAux.mensajeBienvenida(nombre);
+					enviarCorreo(correoAux);
+					try {
+						usuarioDAO.agregarUsuario(aux);
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 				try {
-					usuarioDAO.agregarUsuario(aux);
+					if (usuarioDAO.comprobarNombreUsuario(usuario)) {
+						String m = "";
+						m = "ya hay un usuario";
+					}
 				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
+					// TODO Bloque catch generado autom�ticamente
 					e1.printStackTrace();
 				}
-			}
-			try {
-				if (usuarioDAO.comprobarNombreUsuario(usuario)) {
-					String m = "";
-					m = "ya hay un usuario";
-				}
-			} catch (ClassNotFoundException e1) {
-				// TODO Bloque catch generado autom�ticamente
-				e1.printStackTrace();
-			}
-			usuarioDAO.imprimir();
+				usuarioDAO.imprimir();
 
-		} else if (command.equals("REGISTRAR_ADMIN")) {
+			} else if (flag == 0) {
 
-			casaApuesta.getAdminDAO().leerAdmnins();
+				casaApuesta.getAdminDAO().leerAdmnins();
 
-			String nombre = vista.getPanelRegistroAdmin().devolverCampo(0).getText();
-			String telefono = vista.getPanelRegistroAdmin().devolverCampo(1).getText();
-			String correo = vista.getPanelRegistroAdmin().devolverCampo(2).getText();
-			String documento = vista.getPanelRegistroAdmin().devolverCampo(3).getText();
-			String anioN = "";
-			String usuario = vista.getPanelRegistroAdmin().devolverCampo(4).getText();
-			@SuppressWarnings("deprecation")
-			String contrasenia = vista.getPanelRegistroAdmin().devolverContra(0).getText();
-			@SuppressWarnings("deprecation")
-			String confirmaContra = vista.getPanelRegistroAdmin().devolverContra(1).getText();
-			Correo correoAux = new Correo(correo);
+				if (contrasenia.equals(confirmaContra)) {
 
-			if (contrasenia.equals(confirmaContra)) {
+					if (casaApuesta.getAdminDAO().comprobarUsuario(nombre) == 0) {
 
-				if (casaApuesta.getAdminDAO().comprobarUsuario(nombre) == 0) {
+						Correo correoAdmin = new Correo(correo);
+						correoAdmin.mensajeBienvenidaAdmin(nombre);
+						enviarCorreo(correoAdmin);
 
-					casaApuesta.getAdminDAO().ingresoAdmin(nombre, correoAux, usuario, telefono, documento, anioN,
-							contrasenia);
-					System.out.println("Admin creado con exito");
-
-					Correo correoAdmin = new Correo(correo);
-					correoAdmin.mensajeBienvenidaAdmin(nombre);
-					enviarCorreo(correoAdmin);
-
+						casaApuesta.getAdminDAO().ingresoAdmin(nombre, correoAdmin, usuario, telefono, documento, anioN,
+								contrasenia);
+						System.out.println("Admin creado con exito");
+					} else {
+						System.out.println("Nombre de usuario invalido, por favor cambielo.");
+					}
 				} else {
-					System.out.println("Nombre de usuario invalido, por favor cambielo.");
+					System.out.println("Valide la contraseña");
 
 				}
-
-			} else {
-				System.out.println("Valide la contraseña");
-
 			}
 		}
-		if (command.equals("SEDES")) {
+
+		if (command.equals("SEDES"))
+
+		{
 
 			vista.getPanelControlAdmin().getPanelSede().setVisible(true);
 			vista.getPanelControlAdmin().getPanelEventos().setVisible(false);
@@ -806,13 +799,7 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	public void oyentesBotonesRegstroAdmin() {
-		for (int i = 0; i < 2; i++) {
-			vista.getPanelRegistroAdmin().devolverBoton(i).addActionListener(this);
-		}
-
-	}
-
+	
 	public void cambiarPanel(Component panel) {
 		vista.getContentPane().removeAll();
 		vista.getContentPane().add(panel);

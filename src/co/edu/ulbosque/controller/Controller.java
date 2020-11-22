@@ -191,7 +191,7 @@ public class Controller implements ActionListener {
 			} else if (validarUsuario(user, password) == 2) { // si es user
 				System.out.println("Es user");
 				tamanoVentanas(900, 700);
-				vista.getPanelPortada().quitarInicioSecion(0);
+				vista.getPanelPortada().quitarInicioSesion(1);
 				vista.getPanelPortada().getHolix().setText("Bienvenido " + user);
 				vista.getPanelPortada().activarJuegos();
 				cambiarPanel(vista.getPanelPortada());

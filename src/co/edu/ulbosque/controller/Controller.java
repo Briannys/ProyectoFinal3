@@ -29,6 +29,7 @@ public class Controller implements ActionListener {
 	private VentanaPrincipal vista;
 	private UsuarioDAO usuarioDAO;
 	private CasaApuesta casaApuesta;
+	private boolean flag;
 
 	public Controller() {
 		usuarioDAO = new UsuarioDAO();
@@ -133,7 +134,6 @@ public class Controller implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 
-		int flag = 0;
 		String user = "";
 		String password = "";
 
@@ -174,12 +174,12 @@ public class Controller implements ActionListener {
 			tamanoVentanas(500, 350);
 			cambiarPanel(vista.getPanelIniciarSesion());
 		} else if (command.equals("USERD")) { // registro para el usuario
-			flag = 1;
+			flag = true;
 			tamanoVentanas(600, 650);
 			cambiarPanel(vista.getPanelRegistro());
 
 		} else if (command.equals("ADMIND")) { // registro para el admin
-			flag = 0;
+			flag = false;
 			tamanoVentanas(600, 650);
 			cambiarPanel(vista.getPanelRegistro());
 
@@ -237,6 +237,7 @@ public class Controller implements ActionListener {
 			cambiarPanel(vista.getPanelPortada());
 		} else if (command.equals("REGISTRAR")) {
 
+			System.out.println(flag);
 			String nombre = vista.getPanelRegistro().devolverCampo(0).getText();
 			String telefono = vista.getPanelRegistro().devolverCampo(1).getText();
 			String correo = vista.getPanelRegistro().devolverCampo(2).getText();
@@ -269,7 +270,7 @@ public class Controller implements ActionListener {
 //					tamanoVentanas(500, 350);
 //				}
 
-			if (flag == 1) {
+			if (flag == true) {
 				Correo correoAux = new Correo(correo);
 				if (contrasenia.equals(confirmaContra)) {
 					Usuario aux = new Usuario(nombre, correoAux, telefono, usuario, documento, anioN, contrasenia);
@@ -293,7 +294,7 @@ public class Controller implements ActionListener {
 				}
 				usuarioDAO.imprimir();
 
-			} else if (flag == 0) {
+			} else if (flag == false) {
 
 				casaApuesta.getAdminDAO().leerAdmnins();
 
@@ -940,6 +941,13 @@ public class Controller implements ActionListener {
 			datos[i][2] = casaApuesta.getSedesDAO().getSedes().get(i).getLocalidad();
 			datos[i][3] = Integer.toString(casaApuesta.getSedesDAO().getSedes().get(i).getEmpleados());
 
+		}
+
+		for (int i = 0; i < casaApuesta.getSedesDAO().getSedes().size(); i++) {
+			for (int j = 0; j < 4; j++) {
+
+				System.out.println(datos[i][j]);	
+			}
 		}
 
 		DefaultTableModel modelo = new DefaultTableModel(datos, headTable);

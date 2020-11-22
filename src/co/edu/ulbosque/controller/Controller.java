@@ -16,6 +16,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import co.edu.ulbosque.model.CasaApuesta;
@@ -133,6 +134,8 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		int flag = 0;
+		String user = "";
+		String password = "";
 
 		String command = e.getActionCommand();
 		System.out.println(command);
@@ -182,8 +185,8 @@ public class Controller implements ActionListener {
 
 		} else if (command.equals("INGRESAR")) { // ingresar login
 
-			String user = vista.getPanelIniciarSesion().getUsuario().getText();
-			String password = vista.getPanelIniciarSesion().getContrasena().getText();
+			user = vista.getPanelIniciarSesion().getUsuario().getText();
+			password = vista.getPanelIniciarSesion().getContrasena().getText();
 
 			if (validarUsuario(user, password) == 1) { // si es admin
 				System.out.println("Es admin");
@@ -799,7 +802,6 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	
 	public void cambiarPanel(Component panel) {
 		vista.getContentPane().removeAll();
 		vista.getContentPane().add(panel);
@@ -916,7 +918,7 @@ public class Controller implements ActionListener {
 
 	}
 
-	public void cargarSedesTabla() {
+	public JTable cargarSedesTabla() {
 
 		String headTable[];
 
@@ -943,6 +945,7 @@ public class Controller implements ActionListener {
 		DefaultTableModel modelo = new DefaultTableModel(datos, headTable);
 		vista.getPanelControlAdmin().getPanelSede().getTablaSede().setModel(modelo);
 
+		return vista.getPanelControlAdmin().getPanelSede().getTablaSede();
 	}
 
 	public void cargarEventosTabla(int selec) {

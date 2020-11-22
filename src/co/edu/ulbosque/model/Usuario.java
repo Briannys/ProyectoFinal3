@@ -1,4 +1,4 @@
-	package co.edu.ulbosque.model;
+package co.edu.ulbosque.model;
 
 import java.io.Serializable;
 
@@ -11,6 +11,7 @@ public class Usuario extends Persona implements Serializable {
 	private String documento = "";
 	private String fechaNacimiento = "";
 	private String contrasenia = "";
+	private Long creditos;
 
 	public Usuario() {
 
@@ -22,7 +23,7 @@ public class Usuario extends Persona implements Serializable {
 
 	public Usuario(String nombre, Correo correo, String telefono, String usuario, String documento,
 			String fechaNacimiento, String contrasenia) {
-		
+
 		super.nombre = this.nombre = nombre;
 		super.correo = this.correo = correo;
 		super.telefono = this.telefono = telefono;
@@ -30,6 +31,7 @@ public class Usuario extends Persona implements Serializable {
 		super.documento = this.documento = documento;
 		super.fechaNacimiento = this.fechaNacimiento = fechaNacimiento;
 		super.contrasenia = this.contrasenia = contrasenia;
+		creditos = (long) 10000;
 	}
 
 	@Override
@@ -135,6 +137,20 @@ public class Usuario extends Persona implements Serializable {
 	 */
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
+	}
+
+	/**
+	 * @return the creditos
+	 */
+	public Long getCreditos() {
+		return creditos;
+	}
+
+	/**
+	 * @param creditos the creditos to set
+	 */
+	public void setCreditos(Long creditos) {
+		this.creditos = creditos;
 	}
 
 }

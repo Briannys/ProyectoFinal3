@@ -106,7 +106,7 @@ public class PanelPortada extends JPanel {
 		lfutbol.setForeground(Color.WHITE);
 		lfutbol.setBounds(620, 60, 240, 40);
 		juegos.add(lfutbol);
-		
+
 		holix = new JLabel();
 		holix.setVisible(false);
 		holix.setForeground(new Color(3, 6, 97));
@@ -133,18 +133,21 @@ public class PanelPortada extends JPanel {
 		baloto.setEnabled(true);
 		astro.setEnabled(true);
 	}
-	
 
-	public void quitarInicioSecion(int a) {
-		boolean temp = false;
+	public void quitarInicioSesion(int a) {
 
 		if (a == 1) {
-			temp = true;
+
+			reg.setVisible(false);
+			login.setVisible(false);
+			holix.setVisible(true);
+		} else {
+			reg.setVisible(true);
+			login.setVisible(true);
+			holix.setVisible(false);
+
 		}
-		reg.setVisible(temp);
-		login.setVisible(temp);
-		holix.setVisible(true);
-		
+
 	}
 
 	public void setJuegos(JPanel juegos) {

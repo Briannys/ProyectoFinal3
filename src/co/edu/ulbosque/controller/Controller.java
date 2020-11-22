@@ -30,6 +30,7 @@ public class Controller implements ActionListener {
 	private UsuarioDAO usuarioDAO;
 	private CasaApuesta casaApuesta;
 	private boolean flag;
+	private String hola;
 
 	public Controller() {
 		usuarioDAO = new UsuarioDAO();

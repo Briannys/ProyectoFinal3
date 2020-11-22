@@ -42,7 +42,6 @@ public class UsuarioDAO {
 		try {
 			if (operacion.obtener().size() != usuarios.size()) {
 				for (int i = 0; i < operacion.obtener().size(); i++) {
-
 					usuarios.add(operacion.obtener().get(i));
 				}
 

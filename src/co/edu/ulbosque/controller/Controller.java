@@ -5,7 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -29,15 +32,31 @@ public class Controller implements ActionListener {
 	private VentanaPrincipal vista;
 	private UsuarioDAO usuarioDAO;
 	private CasaApuesta casaApuesta;
+
 	private boolean flag;
+
+	private excel2 excel23;
+
 
 	public Controller() {
 		usuarioDAO = new UsuarioDAO();
 		vista = new VentanaPrincipal();
 		casaApuesta = new CasaApuesta();
+		List<JTable> tb = new ArrayList<>();
+        tb.add(cargarTabla());
+		try {
+			excel23 = new excel2(tb, new File("D://Briannys//book"+".xls"));
+			 if (excel23.export()) {
+	                System.out.println("TABLAS EXPORTADOS CON EXITOS!");
+	            }
+		} catch (Exception e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		} ;
 		asignarOyentes();
 		mouseListener();
-
+		cargarTabla();
+		vista.getPanelControlAdmin().getPanelSede().setVisible(true);
 	}
 
 	public boolean enviarCorreo(Correo c) {
@@ -919,10 +938,9 @@ public class Controller implements ActionListener {
 
 	}
 
-	public JTable cargarSedesTabla() {
+	public void cargarSedesTabla() {
 
 		String headTable[];
-
 		headTable = new String[4];
 		headTable[0] = "Nombre";
 		headTable[1] = "Presupuesto";
@@ -953,7 +971,38 @@ public class Controller implements ActionListener {
 		DefaultTableModel modelo = new DefaultTableModel(datos, headTable);
 		vista.getPanelControlAdmin().getPanelSede().getTablaSede().setModel(modelo);
 
-		return vista.getPanelControlAdmin().getPanelSede().getTablaSede();
+		//return vista.getPanelControlAdmin().getPanelSede().getTablaSede();
+	}
+	public JTable cargarTabla() {
+		String headTable[];
+		headTable = new String[4];
+		headTable[0] = "Nombre";
+		headTable[1] = "Presupuesto";
+		headTable[2] = "Localidad";
+		headTable[3] = "Empleados";
+
+		String datos[][];
+
+		casaApuesta.getSedesDAO().getFileSede().leerRegistros();
+		datos = new String[casaApuesta.getSedesDAO().getSedes().size()][4];
+
+		for (int i = 0; i < casaApuesta.getSedesDAO().getSedes().size(); i++) {
+
+			datos[i][0] = casaApuesta.getSedesDAO().getSedes().get(i).getNombre();
+			datos[i][1] = casaApuesta.getSedesDAO().getSedes().get(i).getPresupuesto().toString();
+			datos[i][2] = casaApuesta.getSedesDAO().getSedes().get(i).getLocalidad();
+			datos[i][3] = Integer.toString(casaApuesta.getSedesDAO().getSedes().get(i).getEmpleados());
+
+		}
+		for (int i = 0; i <  casaApuesta.getSedesDAO().getSedes().size(); i++) {
+			for (int j = 0; j < 4; j++) {
+				System.out.println(datos[i][j]);
+			}
+		}
+		JTable tabla = new JTable(datos, headTable);
+	//	System.out.println(datos);
+		System.out.println(headTable);
+		return tabla;
 	}
 
 	public void cargarEventosTabla(int selec) {

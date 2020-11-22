@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -16,6 +18,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import co.edu.ulbosque.model.CasaApuesta;
@@ -28,13 +31,18 @@ public class Controller implements ActionListener {
 	private VentanaPrincipal vista;
 	private UsuarioDAO usuarioDAO;
 	private CasaApuesta casaApuesta;
+	private excel2 excel23;
 
 	public Controller() {
 		usuarioDAO = new UsuarioDAO();
 		vista = new VentanaPrincipal();
 		casaApuesta = new CasaApuesta();
+		List<JTable> tb = new ArrayList<>();
+//        tb.add(vista.getPanelControlAdmin().getPanelSede().cargar));
+//		excel23 = new excel2(tab, ar)
 		asignarOyentes();
 		mouseListener();
+		
 
 	}
 

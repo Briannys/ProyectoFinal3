@@ -32,6 +32,7 @@ public class PanelPortada extends JPanel {
 		inicio.setBackground(Color.WHITE);
 		inicio.setVisible(true);
 		add(inicio);
+		
 
 		l2 = new JLabel();
 		devolverImagenLabel("User", "gif", 40, 40, l2);

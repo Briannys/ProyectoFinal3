@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="LibreriaCalendario/mail.jar"/>
 	<classpathentry kind="lib" path="LibreriaCalendario/jcalendar-1.4.jar"/>
 	<classpathentry kind="lib" path="LibreriaCalendario/activation-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/WriteToExcel/libreriaExcel/jxl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

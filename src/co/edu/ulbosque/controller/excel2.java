@@ -120,17 +120,15 @@ public class excel2 {
 	    	 JScrollPane sp=new JScrollPane(jt);
 	    	 return jt;
 	    }
-	    public static void main(String[] args) {
-	    	try { 
-	    	List<JTable> tb = new ArrayList<>();
-            tb.add(tablaE());
-            //-------------------
-            excel2 excelExporter = new excel2(tb, new File("D://Briannys//book"+".xls")); // String con directorio
-            if (excelExporter.export()) {
-                System.out.println("TABLAS EXPORTADOS CON EXITOS!");
-            }
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-		}
+//	    public static void main(String[] args) {
+//	    	try { 
+//	    	List<JTable> tb = new ArrayList<>();
+//            tb.add(tablaE());
+//            //-------------------
+//            excel2 excelExporter = new excel2(tb, new File("D://Briannys//book"+".xls")); // String con directorio
+//           
+//        }catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//		}
 }

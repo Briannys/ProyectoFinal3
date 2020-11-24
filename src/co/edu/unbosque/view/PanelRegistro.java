@@ -11,9 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -35,6 +37,7 @@ public class PanelRegistro extends JPanel {
 	private JButton iniciarSesion;
 	private Date dateMin;
 	private Date dateMax;
+	private JComboBox<String> combo;
 	public PanelRegistro() {
 		setLayout(null);
 		setVisible(false);
@@ -42,6 +45,20 @@ public class PanelRegistro extends JPanel {
 		inicializarComponentes();
 	}
 	public void inicializarComponentes() {
+		combo = new JComboBox<String>();
+		combo.addItem("");
+		combo.setBounds(220, 460, 200, 30);
+		add(combo);
+		
+		JLabel textoCombo = new JLabel("Sede");
+		textoCombo.setBounds(60, 460, 40, 30);
+		add(textoCombo);
+		
+		JLabel sedeIm = new JLabel(devolverImagenLabel("sede", "png", 20, 30));
+		sedeIm.setBounds(30, 460, 20, 30);
+		add(sedeIm);
+		
+		
 		registros = new JLabel[20];	
 		inicializarLabels("Nombres y Apellidos",0, 60, 60, 200, 100);
 		inicializarLabels("Teléfono", 1, 60, 120, 100, 60);
@@ -96,6 +113,9 @@ public class PanelRegistro extends JPanel {
 		add(calendar1);
 		
 		camposRegistro = new JTextArea[10];
+		for (int i = 0; i < camposRegistro.length; i++) {
+			camposRegistro[i] = new JTextArea();
+		}
 		inicializarCampos(0, 220, 100, 200, 20);
 		inicializarCampos(1, 220, 140, 200, 20);
 		inicializarCampos(2, 220, 180, 200, 20);
@@ -104,6 +124,8 @@ public class PanelRegistro extends JPanel {
 		//inicializarCampos(4, 220, 300, 200, 20);
 		//inicializarCampos(5, 220, 340, 200, 20);
 		contra = new JPasswordField[2];
+		contra[0] = new JPasswordField();
+		contra[1]  = new JPasswordField();
 		inicializarJPassword(0,  220, 380, 200, 20);
 		inicializarJPassword(1, 220, 420, 200, 20);
 		tipoCedula = new JRadioButton[4];
@@ -112,18 +134,18 @@ public class PanelRegistro extends JPanel {
 		inicializarBotonesCedula("<html><h5>Pasaporte</h5></html>", 2, "PASAPORTE", 460, 215, 120, 30);
 		
 		botonesRegistro = new JButton[3];
-		inicializarBotones("REGISTRAR", 0, "Registrar" ,170,570, 100, 25, Color.green);
-		inicializarBotones("CANCELAR", 1, "Cancelar", 330, 570, 100, 25, Color.red);
+		inicializarBotones("REGISTRAR", 0, "Registrar" ,170,620, 100, 25, Color.green);
+		inicializarBotones("CANCELAR", 1, "Cancelar", 330, 620, 100, 25, Color.red);
 		//
 		confirmarEdad= new JCheckBox();
-		confirmarEdad.setBounds(30,460,30,30);
+		confirmarEdad.setBounds(30,510,30,30);
 		confirmarEdad.setContentAreaFilled(false);
 		add(confirmarEdad);
 		
 		
 		inicializarLabels("<html><div style='text-align:justify;'>" +
 						"<html>Confirmo que tengo 18 años de edad como mínimo. Además, confirmo que he leído y que acepto los términos y condiciones, así como la política de privacidad que describe el procesamiento de datos con fines legales o legítimos.<br/> </html>" +
-						"</div></html>", 10, 60, 455, 300, 100);
+						"</div></html>", 10, 60, 510, 300, 100);
 		
 		
 		iniciarSesion = new JButton("<HTML><U>Iniciar Sesión</U></HTML>");
@@ -134,6 +156,18 @@ public class PanelRegistro extends JPanel {
 		iniciarSesion.setFont(new Font("Century Gothic", 3, 11));
 		iniciarSesion.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		add(iniciarSesion);
+		
+	}
+	
+	public void reiniciarPanel() {
+		for (int i = 0; i < camposRegistro.length; i++) {
+			if(i<2) {
+				contra[i].setText(null);
+			}
+			camposRegistro[i].setText(null);
+		}
+		confirmarEdad.setSelected(false);
+		//Aqui reinicia el calendario
 		
 	}
 	public void inicializarLabels(String tipoRegistro, int pos, int x, int y, int xB, int yB) {
@@ -150,6 +184,12 @@ public class PanelRegistro extends JPanel {
 		registros[b].setBounds(x,y,xB,yB);
 		add(registros[b]);
 	}
+	public Icon devolverImagenLabel(String src, String tipo, int escalax, int escalay) {
+		//registros[b] = new JLabel();
+		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/imagenes/" + src + "." + tipo));
+		ImageIcon icon = new ImageIcon(imagen1.getImage().getScaledInstance(escalax, escalay, Image.SCALE_DEFAULT));
+		return icon;
+	}
 	public void inicializarBotones(String command, int pos, String nomBoton, int x, int y, int xB, int yB, Color color) {
 		botonesRegistro[pos] = new JButton(nomBoton);
 		botonesRegistro[pos].setBackground(color);
@@ -159,7 +199,6 @@ public class PanelRegistro extends JPanel {
 		add(botonesRegistro[pos]);
 	}
 	public void inicializarCampos(int pos,  int x, int y, int xB, int yB) {
-		camposRegistro[pos] = new JTextArea();
 		camposRegistro[pos].setBounds(x, y, xB, yB);
 		camposRegistro[pos].setBorder(new LineBorder(Color.black));
 		add(camposRegistro[pos]);
@@ -286,6 +325,55 @@ public class PanelRegistro extends JPanel {
 	 */
 	public void setTipoCedula(JRadioButton[] tipoCedula) {
 		this.tipoCedula = tipoCedula;
+	}
+	
+	/**
+	 * @return the contra
+	 */
+	public JPasswordField[] getContra() {
+		return contra;
+	}
+	/**
+	 * @param contra the contra to set
+	 */
+	public void setContra(JPasswordField[] contra) {
+		this.contra = contra;
+	}
+	/**
+	 * @return the dateMin
+	 */
+	public Date getDateMin() {
+		return dateMin;
+	}
+	/**
+	 * @param dateMin the dateMin to set
+	 */
+	public void setDateMin(Date dateMin) {
+		this.dateMin = dateMin;
+	}
+	/**
+	 * @return the dateMax
+	 */
+	public Date getDateMax() {
+		return dateMax;
+	}
+	/**
+	 * @param dateMax the dateMax to set
+	 */
+	public void setDateMax(Date dateMax) {
+		this.dateMax = dateMax;
+	}
+	/**
+	 * @return the combo
+	 */
+	public JComboBox<String> getCombo() {
+		return combo;
+	}
+	/**
+	 * @param combo the combo to set
+	 */
+	public void setCombo(JComboBox<String> combo) {
+		this.combo = combo;
 	}
 	/**
 	 * @return el confirmarEdad

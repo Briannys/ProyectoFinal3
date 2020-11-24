@@ -8,13 +8,20 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import co.edu.ulbosque.controller.Controller;
+
 public class VentanaPrincipal extends JFrame {
+	private static final long serialVersionUID = -873170761954289359L;
+
 	private PanelIniciarSesion panelIniciarSesion;
 	private PanelPortada panelPortada;
 	private PanelRegistro panelRegistro;
 	private PanelOlvidarContra panelOlvidarContra;
 	private PanelDecisionAdminUser panelDecisionAdminUser;
 	private PanelControlAdmin panelControlAdmin;
+	private PanelPrincipal panelPrincipalBaloto;
+	private PanelTamanio panelTamanio;
+	private PanelSuperstro panelSuperstro;
 
 	public VentanaPrincipal() {
 		setTitle("Casa de Apuestas");
@@ -35,7 +42,10 @@ public class VentanaPrincipal extends JFrame {
 		panelRegistro = new PanelRegistro();
 		panelOlvidarContra = new PanelOlvidarContra();
 		panelDecisionAdminUser = new PanelDecisionAdminUser();
-		panelControlAdmin =  new PanelControlAdmin();
+		panelControlAdmin = new PanelControlAdmin();
+		panelPrincipalBaloto = new PanelPrincipal();
+		panelSuperstro = new PanelSuperstro();
+		panelTamanio = new PanelTamanio();
 	}
 
 	public void capturarMnesaje(String m) {
@@ -129,8 +139,6 @@ public class VentanaPrincipal extends JFrame {
 		this.panelDecisionAdminUser = panelDecisionAdminUser;
 	}
 
-
-
 	/**
 	 * @return the panelControlAdmin
 	 */
@@ -144,12 +152,44 @@ public class VentanaPrincipal extends JFrame {
 	public void setPanelControlAdmin(PanelControlAdmin panelControlAdmin) {
 		this.panelControlAdmin = panelControlAdmin;
 	}
-	
+
 	public void mostrarMensaje(String m) {
 		JOptionPane.showMessageDialog(null, m);
 	}
-	
 
+	/**
+	 * @return the panelPrincipalBaloto
+	 */
+	public PanelPrincipal getPanelPrincipalBaloto() {
+		return panelPrincipalBaloto;
+	}
 
+	/**
+	 * @param panelPrincipalBaloto the panelPrincipalBaloto to set
+	 */
+	public void setPanelPrincipalBaloto(PanelPrincipal panelPrincipalBaloto) {
+		this.panelPrincipalBaloto = panelPrincipalBaloto;
+	}
+
+	/**
+	 * @return the panelTamanio
+	 */
+	public PanelTamanio getPanelTamanio() {
+		return panelTamanio;
+	}
+
+	/**
+	 * @param panelTamanio the panelTamanio to set
+	 */
+	public void setPanelTamanio(PanelTamanio panelTamanio) {
+		this.panelTamanio = panelTamanio;
+	}
+
+	/**
+	 * @return the panelPanelSuperstro
+	 */
+	public PanelSuperstro getPanelSuperstro() {
+		return panelSuperstro;
+	}
 
 }

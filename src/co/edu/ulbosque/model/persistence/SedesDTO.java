@@ -10,6 +10,7 @@ public class SedesDTO implements Serializable {
 	private String localidad;
 	private int empleados;
 	private ArrayList<EventosDTO> eventos;
+	private int visitas;
 
 	public SedesDTO(String nombreSede, Double presupuesto, String localidad, int empleados) {
 
@@ -18,6 +19,7 @@ public class SedesDTO implements Serializable {
 		this.localidad = localidad;
 		this.empleados = empleados;
 		eventos = new ArrayList<>();
+		visitas = 0;
 
 	}
 

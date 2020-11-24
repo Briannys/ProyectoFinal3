@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 public class PanelPortada extends JPanel {
 
 	private JLabel l1, l2, lbalo, lsupe, lfutbol;
-	private JButton login, reg, baloto, astro, futbol;
+	private JButton login, reg, baloto, astro, futbol,cerrarSesion;
 	private JPanel inicio, juegos;
 	private JLabel holix;
 
@@ -71,12 +71,15 @@ public class PanelPortada extends JPanel {
 		baloto.setBounds(60, 100, 220, 300);
 		baloto.setActionCommand("BALOTO");
 		baloto.setEnabled(false);
+		
 		baloto.setBackground(Color.WHITE);
 		juegos.add(baloto);
 
 		lbalo = new JLabel("Baloto");
 		lbalo.setFont(new Font("Century Gothic", Font.PLAIN, 30));
 		lbalo.setForeground(Color.WHITE);
+		lbalo.setToolTipText("3 aciertos -> 100.000\n4 aciertos ->500.000\n5 aciertos 2'000.000"
+				+ "\n6 aciertos -> 100'000.000");
 		lbalo.setBounds(110, 60, 220, 40);
 		juegos.add(lbalo);
 
@@ -113,6 +116,15 @@ public class PanelPortada extends JPanel {
 		holix.setFont(new Font("Century Gothic", Font.PLAIN, 20));
 		holix.setBounds(540, 35, 300, 30);
 		inicio.add(holix);
+		
+		cerrarSesion = new JButton("<HTML><U>Cerrar sesión</U></HTML>");
+		cerrarSesion.setBounds(505, 70, 150, 40);
+		cerrarSesion.setForeground(Color.red);
+		cerrarSesion.setVisible(false);
+		cerrarSesion.setActionCommand("CERRARS");
+		cerrarSesion.setContentAreaFilled(false);
+		cerrarSesion.setBorder(null);
+		inicio.add(cerrarSesion);
 
 	}
 
@@ -133,6 +145,11 @@ public class PanelPortada extends JPanel {
 		baloto.setEnabled(true);
 		astro.setEnabled(true);
 	}
+	public void generarInicioSesion(String user) {
+		quitarInicioSesion(1);
+		holix.setText("Bienvenido "+user);
+		activarJuegos();
+	}
 
 	public void quitarInicioSesion(int a) {
 
@@ -152,6 +169,21 @@ public class PanelPortada extends JPanel {
 
 	public void setJuegos(JPanel juegos) {
 		this.juegos = juegos;
+	}
+	
+
+	/**
+	 * @return the cerrarSesion
+	 */
+	public JButton getCerrarSesion() {
+		return cerrarSesion;
+	}
+
+	/**
+	 * @param cerrarSesion the cerrarSesion to set
+	 */
+	public void setCerrarSesion(JButton cerrarSesion) {
+		this.cerrarSesion = cerrarSesion;
 	}
 
 	/**

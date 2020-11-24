@@ -5,11 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Properties;
+import java.util.TimerTask;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -17,42 +17,153 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import co.edu.ulbosque.model.Apuesta;
 import co.edu.ulbosque.model.CasaApuesta;
 import co.edu.ulbosque.model.Correo;
+import co.edu.ulbosque.model.Pelota;
+import co.edu.ulbosque.model.PelotasHilos;
+import co.edu.ulbosque.model.RuletaWorker;
+import co.edu.ulbosque.model.SuperAstro;
 import co.edu.ulbosque.model.Usuario;
+import co.edu.ulbosque.model.ValidadorRuletaWorker;
 import co.edu.ulbosque.model.persistence.UsuarioDAO;
+import co.edu.unbosque.view.PanelSuperstro;
 import co.edu.unbosque.view.VentanaPrincipal;
 
 public class Controller implements ActionListener {
 	private VentanaPrincipal vista;
 	private UsuarioDAO usuarioDAO;
 	private CasaApuesta casaApuesta;
-	private excel2 excel23;
+	private Thread t;
+	private boolean flag;
+	Calendar today;
+	private SuperAstro superAstro;
 
 	public Controller() {
 		usuarioDAO = new UsuarioDAO();
 		vista = new VentanaPrincipal();
 		casaApuesta = new CasaApuesta();
-		List<JTable> tb = new ArrayList<>();
-        tb.add(cargarTabla());
-		try {
-			excel23 = new excel2(tb, new File("D://Briannys//book"+".xls"));
-			 if (excel23.export()) {
-	                System.out.println("TABLAS EXPORTADOS CON EXITOS!");
-	            }
-		} catch (Exception e) {
-			// TODO Bloque catch generado automáticamente
-			e.printStackTrace();
-		} ;
+		superAstro = new SuperAstro();
+		today = Calendar.getInstance();
 		asignarOyentes();
 		mouseListener();
-		cargarTabla();
-		vista.getPanelControlAdmin().getPanelSede().setVisible(true);
+		try {
+			iniciarSesion();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void relentizarBoton() {
+
+		java.util.Timer timer = new java.util.Timer();
+		TimerTask timerTask = new TimerTask() {
+			int bandera = 0;
+
+			public void run() {
+				vista.getPanelPrincipalBaloto().getLanzar().setEnabled(false);
+				if (bandera == 3) {
+					vista.getPanelPrincipalBaloto().getLanzar().setEnabled(true);
+					cancel();
+				} else {
+					bandera++;
+				}
+			}
+		};
+		timer.schedule(timerTask, 0, 1000);
+	}
+
+	// Listado 1
+	public JTable tabla1() throws ClassNotFoundException {
+		ArrayList<Usuario> array = usuarioDAO.getUsuarios();
+		String nombres[] = { "Nombre", "Sede", "Fecha registro" };
+		String matriz[][] = new String[array.size()][3];
+		for (int i = 0; i < array.size(); i++) {
+			matriz[i][0] = array.get(i).getNombre();
+			matriz[i][1] = array.get(i).getSede();
+			matriz[i][2] = array.get(i).getFechaRegistro();
+		}
+		JTable tabla = new JTable(matriz, nombres);
+		return tabla;
+	}
+
+	public JTable tabla2() throws ClassNotFoundException {
+		ArrayList<Usuario> array = usuarioDAO.getUsuarios();
+		String nombres[] = { "Nombre", "TotalApostado", "Fecha registro" };
+		String matriz[][] = new String[array.size()][3];
+		for (int i = 0; i < array.size(); i++) {
+			matriz[i][0] = array.get(i).getNombre();
+			matriz[i][1] = String.valueOf(array.get(i).getSaldoTotalInvertido());
+			matriz[i][2] = array.get(i).getFechaRegistro();
+		}
+		JTable tabla = new JTable(matriz, nombres);
+		return tabla;
+	}
+
+	/*
+	 * public JTable devolverTablaUsuariosBaloto() throws ClassNotFoundException {
+	 * ArrayList<ApuestasBaloto> array = usuarioDAO.getApuestasBaloto(); String
+	 * nombres[]= {"Apuesta","Sede","Hora"}; String matriz[][] = new
+	 * String[array.size()][3]; for (int i = 0; i < array.size(); i++) {
+	 * matriz[i][0] = String.valueOf(array.get(i).getCantidad()); matriz[i][1] =
+	 * array.get(i).getSede(); matriz[i][2] = array.get(i).getFecha(); } JTable
+	 * tabla = new JTable(matriz,nombres); return tabla; }
+	 */
+
+	public JTable tablaE() {
+		String data[][] = { { "", "", "" }, { "0", "Nombreeee", "780" }, { "1", "Presupuesto", "65" },
+				{ "2", "Sergio", "44" } };
+		String column[] = { "Cliente", "Nombre", "Telefono" };
+		JTable jt = new JTable(data, column);
+////	    	 JScrollPane sp=new JScrollPane(jt);
+//	    	 return jt;
+		String headTable[];
+		headTable = new String[4];
+		headTable[0] = "Nombre";
+		headTable[1] = "Presupuesto";
+		headTable[2] = "Localidad";
+		headTable[3] = "Empleados";
+
+		String datos[][];
+		casaApuesta.getSedesDAO().getFileSede().leerRegistros();
+		datos = new String[casaApuesta.getSedesDAO().getSedes().size()][4];
+
+		for (int i = 0; i < casaApuesta.getSedesDAO().getSedes().size(); i++) {
+			datos[i][0] = casaApuesta.getSedesDAO().getSedes().get(i).getNombre();
+			datos[i][1] = casaApuesta.getSedesDAO().getSedes().get(i).getPresupuesto().toString();
+			datos[i][2] = casaApuesta.getSedesDAO().getSedes().get(i).getLocalidad();
+			datos[i][3] = Integer.toString(casaApuesta.getSedesDAO().getSedes().get(i).getEmpleados());
+		}
+		JTable tabla = new JTable(data, column);
+		return tabla;
+	}
+
+	public void comienza_el_juego() {
+
+		Pelota pelota = new Pelota();
+
+		vista.getPanelPrincipalBaloto().getPanelPelota().add(pelota);
+
+		Runnable r = new PelotasHilos(pelota, vista.getPanelPrincipalBaloto().getPanelPelota());
+		t = new Thread(r);
+		t.start();
+
+	}
+
+	public void iniciarSesion() throws ClassNotFoundException {
+		Usuario aux = usuarioDAO.comprobarInicioSesion();
+		// System.out.println(aux);
+		if (aux != null) {
+			vista.getPanelPortada().generarInicioSesion(aux.getUsuario());
+			vista.getPanelPortada().getCerrarSesion().setVisible(true);
+		} else {
+			// System.out.println("Es null");
+		}
 	}
 
 	public boolean enviarCorreo(Correo c) {
@@ -74,11 +185,11 @@ public class Controller implements ActionListener {
 			Transport transport = s.getTransport("smtp");
 			try {
 
-				System.out.println("Enviando mensaje");
+				vista.capturarMnesaje("Cargando...");
 				transport.connect("houseappinc@gmail.com", "warzone2020");
 				transport.sendMessage(msg, msg.getAllRecipients());
 				transport.close();
-				System.out.println("Mesnaje enviado");
+				vista.capturarMnesaje("Carga completa");
 				return true;
 			} catch (Exception e) {
 				System.out.println(e.toString());
@@ -104,6 +215,7 @@ public class Controller implements ActionListener {
 		vista.getPanelRegistro().devolverRadioButton(2).addActionListener(this);
 		vista.getPanelIniciarSesion().getOlvidarContra().addActionListener(this);
 		vista.getPanelIniciarSesion().getRegistrar().addActionListener(this);
+		vista.getPanelOlvidarContra().getAtras().addActionListener(this);
 		vista.getPanelRegistro().getIniciarSesion().addActionListener(this);
 		vista.getPanelPortada().getLogin().addActionListener(this);
 		vista.getPanelPortada().getReg().addActionListener(this);
@@ -112,6 +224,15 @@ public class Controller implements ActionListener {
 		vista.getPanelPortada().getBaloto().addActionListener(this);
 		vista.getPanelDecisionAdminUser().getUser().addActionListener(this);
 		vista.getPanelDecisionAdminUser().getAdmin().addActionListener(this);
+		vista.getPanelIniciarSesion().getAtras().addActionListener(this);
+		vista.getPanelPrincipalBaloto().getLanzar().addActionListener(this);
+		vista.getPanelPrincipalBaloto().getSalir().addActionListener(this);
+
+		vista.getPanelTamanio().getContinuar().addActionListener(this);
+
+		vista.getPanelPortada().getCerrarSesion().addActionListener(this);
+
+		vista.getPanelOlvidarContra().getVerificar().addActionListener(this);
 
 		// listeners Control
 
@@ -145,17 +266,26 @@ public class Controller implements ActionListener {
 		vista.getPanelControlAdmin().getPanelSede().getBorrarSede().addActionListener(this);
 		vista.getPanelControlAdmin().getPanelEventos().getGuardarEvento().addActionListener(this);
 		vista.getPanelControlAdmin().getPanelEventos().getBorrarEvento().addActionListener(this);
+
+		// listener jugar superastro
+		vista.getPanelSuperstro().getBtonIniciar().addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
-		int flag = 0;
 		String user = "";
 		String password = "";
 
 		String command = e.getActionCommand();
-		System.out.println(command);
+		// System.out.println(command);
 		if (command.equals("REGISTRARSE")) {
+			casaApuesta.getSedesDAO().leerSedes();
+			vista.getPanelRegistro().getCombo().removeAllItems();
+			vista.getPanelRegistro().getCombo().addItem("");
+			for (int i = 0; i < casaApuesta.getSedesDAO().getSedes().size(); i++) {
+				String item = casaApuesta.getSedesDAO().getSedes().get(i).getNombre();
+				vista.getPanelRegistro().getCombo().addItem(item);
+			}
 			tamanoVentanas(550, 420);
 			cambiarPanel(vista.getPanelDecisionAdminUser());
 		} else if (command.equals("CIUDADANIA")) {
@@ -166,7 +296,105 @@ public class Controller implements ActionListener {
 				vista.getPanelRegistro().devolverRadioButton(1).setEnabled(true);
 				vista.getPanelRegistro().devolverRadioButton(2).setEnabled(true);
 			}
-		} else if (command.equals("EXTRANJERIA")) {
+		}
+		/// empieza
+		else if (command.equals("LAN")) {
+			if (vista.getPanelPrincipalBaloto().getCont2() < 5) {
+				relentizarBoton();
+			}
+			vista.getPanelPrincipalBaloto().lanzarBola();
+			comienza_el_juego();
+			vista.getPanelPrincipalBaloto().agregarMarcador();
+			if (!vista.getPanelPrincipalBaloto().comprobarNumeroEnBoleta()) {
+				vista.getPanelPrincipalBaloto().getPanelMaquina().generarMensajeAleatorio();
+			} else {
+				vista.getPanelPrincipalBaloto().marcarTiroAFavor();
+			}
+
+		} else if (command.equals("JUEGA")) {
+			for (int i = 0; i < 6; i++) {
+				String num = String.valueOf(vista.getPanelTamanio().devolverSlider(i).getValue());
+				vista.getPanelPrincipalBaloto().agregarNumeroUsuario(i, num);
+				vista.getPanelPrincipalBaloto().devolverNumBoleta(i).setText(num);
+			}
+			vista.getPanelPrincipalBaloto().getPanelPelota().getNumero().setVisible(true);
+			tamanoVentanas(1100, 700);
+			cambiarPanel(vista.getPanelPrincipalBaloto());
+
+		} else if (command.equals("CERRARS")) {
+			vista.getPanelPortada().quitarInicioSesion(0);
+			usuarioDAO.desmarcarUsuarioComoInicioSesion();
+			vista.getPanelPortada().getHolix().setVisible(false);
+			vista.getPanelPortada().getCerrarSesion().setVisible(false);
+
+		} else if (command.equals("ATR-OLV")) {
+			vista.getPanelOlvidarContra().reiniciarPanel();
+			cambiarPanel(vista.getPanelPortada());
+			tamanoVentanas(900, 700);
+		} else if (command.equals("ATR-IN")) {
+			vista.getPanelIniciarSesion().reiniciarPanel();
+			cambiarPanel(vista.getPanelPortada());
+			tamanoVentanas(900, 700);
+		} else if (command.equals("CREA")) {
+			vista.getPanelPrincipalBaloto().generarBoleta();
+			vista.getPanelPrincipalBaloto().getLanzar().setEnabled(true);
+		} else if (command.equals("SAL")) {
+			int aciertos = vista.getPanelPrincipalBaloto().numeroAciertos();
+			try {
+				Usuario aux = usuarioDAO.comprobarInicioSesion();
+				Long aumento = (long) 0;
+				if (aciertos == 3) {
+					aumento = (long) 100000;
+					// aux.setSaldoGanado(aux.getSaldoGanado()+100000);
+				} else if (aciertos == 4) {
+					aumento = (long) 500000;
+					// aux.setSaldoGanado(aux.getSaldoGanado()+500000);
+				} else if (aciertos == 5) {
+					aumento = (long) 2000000;
+					// aux.setSaldoGanado(aux.getSaldoGanado()+2000000);
+				} else if (aciertos == 6) {
+					aumento = (long) 100000000;
+					// aux.setSaldoGanado(aux.getSaldoGanado()+100000000);
+				}
+				usuarioDAO.sobreescribirDadoUsuario(aux, (long) 0, aumento);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			vista.getPanelTamanio().reiniciarSLiders();
+			vista.getPanelPrincipalBaloto().reinciarMarcadores();
+			vista.getPanelPrincipalBaloto().reinciarEquis();
+			cambiarPanel(vista.getPanelPortada());
+			tamanoVentanas(900, 700);
+			vista.getPanelPrincipalBaloto().reiniciarBaloto();
+		} else if (command.equals("VERI")) {
+			String correo = vista.getPanelOlvidarContra().getCampoUsuario().getText();
+			String correoConfirma = vista.getPanelOlvidarContra().getConfirmarUser().getText();
+
+			if (!correo.equals(correoConfirma)) {
+				vista.mostrarMensaje("Correos no son iguales");
+			} else {
+				try {
+					if (!usuarioDAO.buscarCorreo(correo)) {
+						vista.mostrarMensaje("Correo no encontrado");
+					} else {
+						Usuario aux = usuarioDAO.obtenerUsuarioDadoCorreo(correo);
+						aux.getCorreo().generarContrasenia();
+						enviarCorreo(aux.getCorreo());
+						usuarioDAO.cambiarContraseña(aux, aux.getCorreo().getContraseniaGenerada());
+						cambiarPanel(vista.getPanelIniciarSesion());
+						tamanoVentanas(500, 350);
+					}
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+
+		/// termina
+
+		else if (command.equals("EXTRANJERIA")) {
 			if (vista.getPanelRegistro().devolverRadioButton(1).isSelected() == true) {
 				vista.getPanelRegistro().devolverRadioButton(0).setEnabled(false);
 				vista.getPanelRegistro().devolverRadioButton(2).setEnabled(false);
@@ -190,13 +418,13 @@ public class Controller implements ActionListener {
 			tamanoVentanas(500, 350);
 			cambiarPanel(vista.getPanelIniciarSesion());
 		} else if (command.equals("USERD")) { // registro para el usuario
-			flag = 1;
-			tamanoVentanas(600, 650);
+			flag = true;
+			tamanoVentanas(600, 700);
 			cambiarPanel(vista.getPanelRegistro());
 
 		} else if (command.equals("ADMIND")) { // registro para el admin
-			flag = 0;
-			tamanoVentanas(600, 650);
+			flag = false;
+			tamanoVentanas(600, 700);
 			cambiarPanel(vista.getPanelRegistro());
 
 		} else if (command.equals("INGRESAR")) { // ingresar login
@@ -204,21 +432,39 @@ public class Controller implements ActionListener {
 			user = vista.getPanelIniciarSesion().getUsuario().getText();
 			password = vista.getPanelIniciarSesion().getContrasena().getText();
 
-			if (validarUsuario(user, password) == 1) { // si es admin
-				System.out.println("Es admin");
-				tamanoVentanas(900, 700);
-				cambiarPanel(vista.getPanelControlAdmin());
+			try {
+				if (validarUsuario(user, password) == 1) { // si es admin
+					tamanoVentanas(900, 700);
+					cambiarPanel(vista.getPanelControlAdmin());
 
-			} else if (validarUsuario(user, password) == 2) { // si es user
-				System.out.println("Es user");
-				tamanoVentanas(900, 700);
-				vista.getPanelPortada().quitarInicioSesion(1);
-				vista.getPanelPortada().getHolix().setText("Bienvenido " + user);
-				vista.getPanelPortada().activarJuegos();
-				cambiarPanel(vista.getPanelPortada());
+				} else if (validarUsuario(user, password) == 2) { // si es user
+					try {
+						Usuario aux = usuarioDAO.devolverUsuario(user);
+						usuarioDAO.marcarUsuarioComoInicioSesion(aux);
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					tamanoVentanas(900, 700);
+					vista.getPanelPortada().quitarInicioSesion(1);
+					vista.getPanelPortada().getHolix().setText("Bienvenido " + user);
+					vista.getPanelPortada().activarJuegos();
+					vista.getPanelIniciarSesion().reiniciarPanel();
+					vista.getPanelPortada().getCerrarSesion().setVisible(true);
+					cambiarPanel(vista.getPanelPortada());
 
-			} else if (validarUsuario(user, password) == 0) { // si no existe
-				System.out.println("No esta registrado");
+				} else
+					try {
+						if (validarUsuario(user, password) == 0) { // si no existe
+							System.out.println("No esta registrado");
+						}
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 
 		} else if (command.equals("INICIARSESION")) {
@@ -231,12 +477,60 @@ public class Controller implements ActionListener {
 			cambiarPanel(vista.getPanelDecisionAdminUser());
 
 		} else if (command.equals("BALOTO")) {
+			vista.getPanelPrincipalBaloto().getLanzar().setEnabled(true);
+			try {
+				Usuario aux = usuarioDAO.comprobarInicioSesion();
+				String hoy = today.getTime().toString();
+				String hoyF = hoy.substring(4, 10) + " 2020";
+				Apuesta apuestaAux = new Apuesta("Baloto", (long) 5000, hoyF, aux.getSede());
+				usuarioDAO.agregarApuestaBaloto(apuestaAux, aux);
+				usuarioDAO.sobreescribirDadoUsuario(aux, (long) 5000, (long) 0);
+				for (Apuesta a : aux.getApuestas()) {
+					// System.out.println(a);
+				}
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
-			vista.getPanelPortada().setVisible(false);
+			cambiarPanel(vista.getPanelTamanio());
+			tamanoVentanas(500, 800);
 
 		} else if (command.equals("SUPERASTRO")) {
 
-			vista.getPanelPortada().setVisible(false);
+			cambiarPanel(vista.getPanelSuperstro());
+			tamanoVentanas(800, 400);
+
+		} else if ("JUGAR_SUPER_ASTRO".equals(command)) {
+			
+			
+			
+			superAstro.generarAleatorios();
+
+			RuletaWorker worker1 = new RuletaWorker(vista.getPanelSuperstro().getRuletaNumeros1(), superAstro.getNumero1());
+			worker1.execute();
+
+			RuletaWorker worker2 = new RuletaWorker(vista.getPanelSuperstro().getRuletaNumeros2(), superAstro.getNumero2());
+			worker2.execute();
+
+			RuletaWorker worker3 = new RuletaWorker(vista.getPanelSuperstro().getRuletaNumeros3(), superAstro.getNumero3());
+			worker3.execute();
+
+			RuletaWorker worker4 = new RuletaWorker(vista.getPanelSuperstro().getRuletaNumeros4(), superAstro.getNumero4());
+			worker4.execute();
+
+			RuletaWorker workerAstro = new RuletaWorker(vista.getPanelSuperstro().getRuletaAstro(), superAstro.getNumeroAstro());
+			workerAstro.execute();
+
+			ValidadorRuletaWorker validador = new ValidadorRuletaWorker(worker1, worker2, worker3, worker4, workerAstro,
+					(int) vista.getPanelSuperstro().getNumero1().getSelectedItem(),
+					(int) vista.getPanelSuperstro().getNumero2().getSelectedItem(),
+					(int) vista.getPanelSuperstro().getNumero3().getSelectedItem(),
+					(int) vista.getPanelSuperstro().getNumero4().getSelectedItem(), vista.getPanelSuperstro().getSignos().getSelectedIndex(),
+					vista.getPanelSuperstro().getVisualizarGanoPerdio(), vista.getPanelSuperstro().getCreditos(),
+					vista.getPanelSuperstro().getMontoApuesta());
+
+			validador.execute();
 
 		} else if (command.equals("FUTBOL")) {
 			vista.getPanelPortada().setVisible(false);
@@ -248,6 +542,7 @@ public class Controller implements ActionListener {
 			cambiarPanel(vista.getPanelPortada());
 		} else if (command.equals("CANCELAR")) {
 			vista.getPanelRegistro().setVisible(false);
+			vista.getPanelRegistro().reiniciarPanel();
 			// vista.getPanelIniciarSesion().reiniciarTextos();
 			tamanoVentanas(900, 700);
 			cambiarPanel(vista.getPanelPortada());
@@ -259,6 +554,7 @@ public class Controller implements ActionListener {
 			String documento = vista.getPanelRegistro().devolverCampo(3).getText();
 			String anioN = "";
 			String usuario = vista.getPanelRegistro().devolverCampo(4).getText();
+			String sede = vista.getPanelRegistro().getCombo().getSelectedItem().toString();
 			@SuppressWarnings("deprecation")
 			String contrasenia = vista.getPanelRegistro().devolverContra(0).getText();
 			@SuppressWarnings("deprecation")
@@ -285,31 +581,37 @@ public class Controller implements ActionListener {
 //					tamanoVentanas(500, 350);
 //				}
 
-			if (flag == 1) {
+			if (flag == true) {
 				Correo correoAux = new Correo(correo);
-				if (contrasenia.equals(confirmaContra)) {
-					Usuario aux = new Usuario(nombre, correoAux, telefono, usuario, documento, anioN, contrasenia);
-					correoAux.mensajeBienvenida(nombre);
-					enviarCorreo(correoAux);
-					try {
-						usuarioDAO.agregarUsuario(aux);
-					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
 				try {
-					if (usuarioDAO.comprobarNombreUsuario(usuario)) {
-						String m = "";
-						m = "ya hay un usuario";
+					if (contrasenia.equals(confirmaContra) && !usuarioDAO.comprobarNombreUsuario(usuario)) {
+						Usuario aux = new Usuario(nombre, correoAux, telefono, usuario, documento, anioN, contrasenia);
+						correoAux.mensajeBienvenida(nombre);
+						String hoy = today.getTime().toString();
+						String hoyF = hoy.substring(4, 10) + " 2020";
+						aux.setFechaRegistro(hoyF);
+						aux.setSede(sede);
+						enviarCorreo(correoAux);
+						try {
+							usuarioDAO.agregarUsuario(aux);
+							usuarioDAO.imprimir();
+							vista.capturarMnesaje("Registrado exitosamente");
+							vista.getPanelRegistro().reiniciarPanel();
+							cambiarPanel(vista.getPanelIniciarSesion());
+							tamanoVentanas(500, 350);
+						} catch (ClassNotFoundException e1) {
+
+							e1.printStackTrace();
+						}
+					} else {
+						vista.capturarMnesaje("Contraseña no coincide o usario en uso");
 					}
 				} catch (ClassNotFoundException e1) {
-					// TODO Bloque catch generado autom�ticamente
+
 					e1.printStackTrace();
 				}
-				usuarioDAO.imprimir();
 
-			} else if (flag == 0) {
+			} else if (flag == false) {
 
 				casaApuesta.getAdminDAO().leerAdmnins();
 
@@ -337,7 +639,12 @@ public class Controller implements ActionListener {
 		if (command.equals("SEDES"))
 
 		{
-
+			/*
+			 * List<JTable> tb = new ArrayList<>(); tb.add(tablaE()); try { excel23 = new
+			 * excel2(tb, new File("D://Briannys//book"+".xls")); if (excel23.export()) {
+			 * System.out.println("TABLAS EXPORTADOS CON EXITOS!"); } } catch (Exception e1)
+			 * { // TODO Bloque catch generado automáticamente e1.printStackTrace(); }
+			 */
 			vista.getPanelControlAdmin().getPanelSede().setVisible(true);
 			vista.getPanelControlAdmin().getPanelEventos().setVisible(false);
 			casaApuesta.getSedesDAO().leerSedes();
@@ -376,13 +683,13 @@ public class Controller implements ActionListener {
 
 				if (vista.getPanelControlAdmin().getPanelSede()
 						.devolverTextField(0, vista.getPanelControlAdmin().getPanelSede().getCampoCrear()).getText()
-						.isBlank()
+						.isEmpty()
 						|| vista.getPanelControlAdmin().getPanelSede()
 								.devolverTextField(1, vista.getPanelControlAdmin().getPanelSede().getCampoCrear())
-								.getText().isBlank()
+								.getText().isEmpty()
 						|| vista.getPanelControlAdmin().getPanelSede()
 								.devolverTextField(2, vista.getPanelControlAdmin().getPanelSede().getCampoCrear())
-								.getText().isBlank()) {
+								.getText().isEmpty()) {
 
 					vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 					vista.mostrarMensaje("Señor usuario hay campos vacios");
@@ -489,13 +796,13 @@ public class Controller implements ActionListener {
 
 				if (vista.getPanelControlAdmin().getPanelSede()
 						.devolverTextField(0, vista.getPanelControlAdmin().getPanelSede().getCampoModificar()).getText()
-						.isBlank()
+						.isEmpty()
 						|| vista.getPanelControlAdmin().getPanelSede()
 								.devolverTextField(1, vista.getPanelControlAdmin().getPanelSede().getCampoModificar())
-								.getText().isBlank()
+								.getText().isEmpty()
 						|| vista.getPanelControlAdmin().getPanelSede()
 								.devolverTextField(2, vista.getPanelControlAdmin().getPanelSede().getCampoModificar())
-								.getText().isBlank()) {
+								.getText().isEmpty()) {
 
 					vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 					vista.mostrarMensaje("Señor usuario hay campos vacios.");
@@ -672,8 +979,8 @@ public class Controller implements ActionListener {
 
 			if (vista.getPanelControlAdmin().getPanelEventos().devolverTextField(0).getText().isEmpty()
 					|| vista.getPanelControlAdmin().getPanelEventos().devolverTextField(1).getText().isEmpty()
-					|| vista.getPanelControlAdmin().getPanelEventos().devolverTextField(0).getText().isBlank()
-					|| vista.getPanelControlAdmin().getPanelEventos().devolverTextField(1).getText().isBlank()
+					|| vista.getPanelControlAdmin().getPanelEventos().devolverTextField(0).getText().isEmpty()
+					|| vista.getPanelControlAdmin().getPanelEventos().devolverTextField(1).getText().isEmpty()
 					|| vista.getPanelControlAdmin().getPanelEventos().devolverCalendario(0).getDate() == null) {
 
 				vista.mostrarMensaje("Señor usuario hay espacios en blanco :) ");
@@ -786,7 +1093,7 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	public int validarUsuario(String user, String password) {
+	public int validarUsuario(String user, String password) throws ClassNotFoundException {
 
 		int temp = 0;
 
@@ -957,11 +1264,19 @@ public class Controller implements ActionListener {
 
 		}
 
+		for (int i = 0; i < casaApuesta.getSedesDAO().getSedes().size(); i++) {
+			for (int j = 0; j < 4; j++) {
+
+				System.out.println(datos[i][j]);
+			}
+		}
+
 		DefaultTableModel modelo = new DefaultTableModel(datos, headTable);
 		vista.getPanelControlAdmin().getPanelSede().getTablaSede().setModel(modelo);
 
-		//return vista.getPanelControlAdmin().getPanelSede().getTablaSede();
+		// return vista.getPanelControlAdmin().getPanelSede().getTablaSede();
 	}
+
 	public JTable cargarTabla() {
 		String headTable[];
 		headTable = new String[4];
@@ -971,26 +1286,24 @@ public class Controller implements ActionListener {
 		headTable[3] = "Empleados";
 
 		String datos[][];
-
 		casaApuesta.getSedesDAO().getFileSede().leerRegistros();
 		datos = new String[casaApuesta.getSedesDAO().getSedes().size()][4];
 
 		for (int i = 0; i < casaApuesta.getSedesDAO().getSedes().size(); i++) {
-
 			datos[i][0] = casaApuesta.getSedesDAO().getSedes().get(i).getNombre();
 			datos[i][1] = casaApuesta.getSedesDAO().getSedes().get(i).getPresupuesto().toString();
 			datos[i][2] = casaApuesta.getSedesDAO().getSedes().get(i).getLocalidad();
 			datos[i][3] = Integer.toString(casaApuesta.getSedesDAO().getSedes().get(i).getEmpleados());
 
 		}
-		for (int i = 0; i <  casaApuesta.getSedesDAO().getSedes().size(); i++) {
-			for (int j = 0; j < 4; j++) {
-				System.out.println(datos[i][j]);
-			}
-		}
+//		for (int i = 0; i <  casaApuesta.getSedesDAO().getSedes().size(); i++) {
+//			for (int j = 0; j < 4; j++) {
+//				System.out.println(datos[i][j]);
+//			}
+//		}
 		JTable tabla = new JTable(datos, headTable);
-	//	System.out.println(datos);
-		System.out.println(headTable);
+		// System.out.println(datos);
+//		System.out.println(headTable);
 		return tabla;
 	}
 

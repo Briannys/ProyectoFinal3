@@ -15,8 +15,9 @@ import javax.swing.border.LineBorder;
 public class PanelOlvidarContra extends JPanel{
 	private JLabel[] olvidarContra;
 	private JButton verificar;
+	private JButton atras;
 	private JTextArea campoUsuario;
-	private JPasswordField confirmarUser;
+	private JTextArea confirmarUser;
 	public PanelOlvidarContra() {
 		setLayout(null);
 		setVisible(false);
@@ -25,13 +26,14 @@ public class PanelOlvidarContra extends JPanel{
 	}
 	public void inicializarComponentes() {
 		olvidarContra = new JLabel[5];
-		inicializarLabels("Olvidaste Contraseña", 0, 140, 10, 290, 60);
+		inicializarLabels("Olvidaste ContraseÃ±a", 0, 140, 10, 290, 60);
 		olvidarContra[0].setFont(new Font("Century Gothic", 0, 20));
 		inicializarLabels("Correo", 1,60, 100, 100, 30);
 		inicializarLabels("Confirmar Correo", 2, 60, 150, 140, 30);
 
 		verificar = new JButton("Enviar Correo");
 		verificar.setBounds(185,225,120,30);
+		verificar.setActionCommand("VERI");
 		verificar.setBackground(Color.green);
 		add(verificar);
 		
@@ -40,10 +42,15 @@ public class PanelOlvidarContra extends JPanel{
 		campoUsuario.setBorder(new LineBorder(Color.black));
 		add(campoUsuario);
 		
-		confirmarUser = new JPasswordField();
+		confirmarUser = new JTextArea();
 		confirmarUser.setBounds(220, 156, 200, 20);
 		confirmarUser.setBorder(new LineBorder(Color.black));
 		add(confirmarUser);
+		
+		atras = new JButton("Atras");
+		atras.setBounds(400, 280, 70, 40);
+		atras.setActionCommand("ATR-OLV");
+		add(atras);
 		
 		devolverImagenLabel("correo", "png", 20, 20, 3,30, 32, 100, 170 );
 		devolverImagenLabel("correo", "png", 20, 20, 4, 30, 80, 100, 170);
@@ -63,4 +70,70 @@ public class PanelOlvidarContra extends JPanel{
 		olvidarContra[b].setBounds(x,y,xB,yB);
 		add(olvidarContra[b]);
 	}
+	public void reiniciarPanel() {
+		campoUsuario.setText(null);
+		confirmarUser.setText(null);
+	}
+	/**
+	 * @return the olvidarContra
+	 */
+	public JLabel[] getOlvidarContra() {
+		return olvidarContra;
+	}
+	/**
+	 * @param olvidarContra the olvidarContra to set
+	 */
+	public void setOlvidarContra(JLabel[] olvidarContra) {
+		this.olvidarContra = olvidarContra;
+	}
+	/**
+	 * @return the verificar
+	 */
+	public JButton getVerificar() {
+		return verificar;
+	}
+	
+	/**
+	 * @return the atras
+	 */
+	public JButton getAtras() {
+		return atras;
+	}
+	/**
+	 * @param atras the atras to set
+	 */
+	public void setAtras(JButton atras) {
+		this.atras = atras;
+	}
+	/**
+	 * @param verificar the verificar to set
+	 */
+	public void setVerificar(JButton verificar) {
+		this.verificar = verificar;
+	}
+	/**
+	 * @return the campoUsuario
+	 */
+	public JTextArea getCampoUsuario() {
+		return campoUsuario;
+	}
+	/**
+	 * @param campoUsuario the campoUsuario to set
+	 */
+	public void setCampoUsuario(JTextArea campoUsuario) {
+		this.campoUsuario = campoUsuario;
+	}
+	/**
+	 * @return the confirmarUser
+	 */
+	public JTextArea getConfirmarUser() {
+		return confirmarUser;
+	}
+	/**
+	 * @param confirmarUser the confirmarUser to set
+	 */
+	public void setConfirmarUser(JTextArea confirmarUser) {
+		this.confirmarUser = confirmarUser;
+	}
+	
 }

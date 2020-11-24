@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="Testsrc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -9,6 +10,6 @@
 	<classpathentry kind="lib" path="LibreriaCalendario/mail.jar"/>
 	<classpathentry kind="lib" path="LibreriaCalendario/jcalendar-1.4.jar"/>
 	<classpathentry kind="lib" path="LibreriaCalendario/activation-1.1.1.jar"/>
-	<classpathentry kind="lib" path="/WriteToExcel/libreriaExcel/jxl.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

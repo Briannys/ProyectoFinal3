@@ -23,6 +23,7 @@ public class PanelIniciarSesion extends JPanel {
 	private JPasswordField contrasena;
 	private JButton ingresar;
 	private JButton registrar;
+	private JButton atras;
 	
 	public PanelIniciarSesion() {
 		setLayout(null);
@@ -75,6 +76,15 @@ public class PanelIniciarSesion extends JPanel {
 		registrar.setActionCommand("REGISTRATE");
 		add(registrar);
 		
+		atras = new JButton("Atras");
+		atras.setBounds(400, 280, 70, 40);
+		atras.setActionCommand("ATR-IN");
+		add(atras);
+		
+	}
+	public void reiniciarPanel() {
+		usuario.setText(null);
+		contrasena.setText(null);
 	}
 	public void inicializarLabels(String tipoRegistro, int pos, int x, int y, int xB, int yB) {
 		registros[pos]= new JLabel(tipoRegistro);
@@ -96,6 +106,19 @@ public class PanelIniciarSesion extends JPanel {
 	 */
 	public JButton getOlvidarContra() {
 		return olvidarContra;
+	}
+	
+	/**
+	 * @return the atras
+	 */
+	public JButton getAtras() {
+		return atras;
+	}
+	/**
+	 * @param atras the atras to set
+	 */
+	public void setAtras(JButton atras) {
+		this.atras = atras;
 	}
 	/**
 	 * @param olvidarContra el olvidarContra a establecer
